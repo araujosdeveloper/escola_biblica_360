@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Main App Colors - Escola Bíblica 360 Theme */
+    --primary: 206 52% 21%; /* #1a3a52 - Dark Blue */
+    --primary-medium: 206 52% 26%;
+    --primary-foreground: 0 0% 100%;
+    
+    --accent: 46 65% 52%; /* #d4af37 - Gold */
+    --accent-foreground: 206 52% 15%;
+    
+    --background: 0 0% 98%;
+    --foreground: 206 52% 15%;
+    
+    --muted: 210 14% 83%;
+    --muted-foreground: 215 16% 47%;
+    
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 206 52% 21%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 206 52% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 206 52% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 210 40% 96%;
+    --ring: 46 65% 52%;
+    --radius: 0.5rem;
+
+    /* Admin specific colors in HSL */
+    --admin-dark: 206 52% 21%;
+    --admin-gold: 46 65% 52%;
+    --admin-danger: 6 78% 57%;
+    --admin-success: 145 63% 42%;
+    --admin-warning: 37 90% 51%;
+    
+    --admin-background: 210 40% 96%;
+    --admin-border: 214 32% 91%;
+    --admin-sidebar: 206 52% 16%;
+    --admin-sidebar-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 206 52% 10%;
+    --foreground: 210 40% 98%;
+    --primary: 206 52% 21%;
+    --primary-medium: 206 52% 26%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 46 65% 52%;
+    --accent-foreground: 206 52% 10%;
+    --muted: 206 52% 16%;
+    --muted-foreground: 210 14% 83%;
+    --secondary: 206 52% 16%;
+    --secondary-foreground: 210 40% 98%;
+    --card: 206 52% 13%;
+    --card-foreground: 210 40% 98%;
+    --popover: 206 52% 13%;
+    --popover-foreground: 210 40% 98%;
+    --border: 206 52% 18%;
+    --input: 206 52% 18%;
+    --ring: 46 65% 52%;
+
+    /* Admin specific colors (Dark mode) */
+    --admin-dark: 206 52% 21%;
+    --admin-gold: 46 65% 52%;
+    --admin-danger: 6 78% 57%;
+    --admin-success: 145 63% 42%;
+    --admin-warning: 37 90% 51%;
+    
+    --admin-background: 206 52% 10%;
+    --admin-border: 206 52% 16%;
+    --admin-sidebar: 206 52% 13%;
+    --admin-sidebar-foreground: 0 0% 100%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "DM Sans", sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    overflow-x: hidden;
+    line-height: 1.625;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+}
