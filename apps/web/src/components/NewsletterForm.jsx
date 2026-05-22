@@ -3,46 +3,96 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Loader2, Send } from 'lucide-react';
+import { Loader2, Send, CheckCircle2 } from 'lucide-react';
 import pb from '@/lib/pocketbaseProductionClient.js';
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email) return;
-    
+  const isValidEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!normalizedEmail) {
+      toast.error('Informe seu e-mail.');
+      return;
+    }
+
+    if (!isValidEmail(normalizedEmail)) {
+      toast.error('Informe um e-mail válido.');
+      return;
+    }
+
     setLoading(true);
+
     try {
-      await pb.collection('newsletter_subscribers').create({
-        email,
-        status: 'active',
-        date_subscribed: new Date().toISOString()
-      }, { $autoCancel: false });
+      await pb.collection('newsletter_subscribers').create(
+        {
+          email: normalizedEmail,
+          status: 'active',
+          date_subscribed: new Date().toISOString(),
+        },
+        {
+          $autoCancel: false,
+        }
+      );
+
       toast.success('Inscrição realizada com sucesso!');
       setEmail('');
-    } catch (error) {
-      toast.error('Erro ao se inscrever. Talvez o e-mail já esteja cadastrado.');
+      setSubscribed(true);
+    } catch {
+      toast.error('Não foi possível cadastrar este e-mail. Talvez ele já esteja inscrito.');
     } finally {
       setLoading(false);
     }
   };
 
+  if (subscribed) {
+    return (
+      <div className="flex items-start gap-3 rounded-2xl border border-green-200 bg-green-50 p-4 text-green-700">
+        <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0" />
+
+        <div>
+          <p className="text-sm font-semibold">Inscrição confirmada</p>
+          <p className="text-sm text-green-700/80">
+            Você receberá nossos próximos conteúdos no seu e-mail.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
       <Input
         type="email"
+        inputMode="email"
+        autoComplete="email"
         placeholder="Seu melhor e-mail"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(event) => setEmail(event.target.value)}
         required
         disabled={loading}
-        className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-accent"
+        className="min-h-11 bg-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-accent"
       />
-      <Button type="submit" disabled={loading} className="bg-accent text-accent-foreground hover:bg-accent/90 whitespace-nowrap">
-        {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Send className="w-4 h-4 mr-2" />}
+
+      <Button
+        type="submit"
+        disabled={loading}
+        className="min-h-11 whitespace-nowrap bg-accent text-accent-foreground hover:bg-accent/90"
+      >
+        {loading ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <Send className="mr-2 h-4 w-4" />
+        )}
         Inscrever
       </Button>
     </form>

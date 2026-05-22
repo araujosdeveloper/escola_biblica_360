@@ -81,7 +81,8 @@ export const AdminAuthProvider = ({ children }) => {
 
   const isAuthenticated = pb.authStore.isValid;
   const role = currentAdmin?.role;
-
+  const isAdmin = ['super_admin', 'admin', 'editor', 'moderador'].includes(role);
+  
   const hasPermission = (permission) => {
     const allowed = checkPermission(role, permission);
     if (!allowed && permission) {
@@ -94,6 +95,7 @@ export const AdminAuthProvider = ({ children }) => {
     <AdminAuthContext.Provider value={{
       currentAdmin,
       isAuthenticated,
+      isAdmin,
       role,
       hasPermission,
       login,

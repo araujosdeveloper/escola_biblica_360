@@ -1,69 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+>
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://escolabiblica360.com/</loc>
     <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <priority>1.0</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/estudos-biblicos</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://escolabiblica360.com/estudos-biblicos</loc>
     <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/licoes-ebd</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://escolabiblica360.com/licoes-ebd</loc>
     <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/professores</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/escatologia</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/escatologia</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/sermoes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/sermoes</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/infantil</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/infantil</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/professores</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/downloads</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/downloads</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/sobre</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/sobre</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
+
   <url>
-    <loc>https://xn--escolabblica360-bpb.com/contato</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>https://xn--escolabblica360-bpb.com/busca</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://escolabiblica360.com/contato</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

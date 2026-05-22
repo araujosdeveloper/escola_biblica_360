@@ -1,3 +1,11 @@
 User-agent: *
+
 Allow: /
-Sitemap: https://xn--escolabblica360-bpb.com/sitemap.xml
+
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /_/
+
+Sitemap: https://escolabiblica360.com/sitemap.xml

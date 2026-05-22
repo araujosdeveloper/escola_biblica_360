@@ -1,57 +1,97 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 
-function ArticleCard({ image, category, title, summary, date, readTime, path, index = 0 }) {
+function ArticleCard({
+  image,
+  category,
+  title,
+  summary,
+  date,
+  readTime,
+  path,
+  index = 0,
+}) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-border flex flex-col h-full"
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10"
     >
-      <div className="relative overflow-hidden h-48">
-        <img
-          src={image || 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65'}
-          alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        {category && (
-          <div className="absolute top-4 left-4">
-            <Badge className="bg-accent text-accent-foreground font-semibold">{category}</Badge>
-          </div>
-        )}
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-semibold text-card-foreground mb-3 font-['Poppins'] line-clamp-2 group-hover:text-accent transition-colors duration-200">
-          {title}
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3 flex-grow">
-          {summary}
-        </p>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-          <div className="flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5" />
-            <span>{date}</span>
-          </div>
-          {readTime && (
-            <div className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              <span>{readTime}</span>
+      <Link to={path} className="flex h-full flex-col">
+        {/* IMAGE */}
+        <div className="relative h-56 overflow-hidden bg-muted">
+          <img
+            src={
+              image ||
+              'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1600&auto=format&fit=crop'
+            }
+            alt={title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/10 to-transparent opacity-90" />
+
+          {/* Category */}
+          {category && (
+            <div className="absolute left-4 top-4">
+              <Badge className="border border-white/20 bg-white/90 text-primary shadow-sm backdrop-blur-md hover:bg-white">
+                {category}
+              </Badge>
             </div>
           )}
+
+          {/* Meta */}
+          <div className="absolute bottom-4 left-4 right-4">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-white/90">
+              {date && (
+                <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                  <Calendar className="h-3.5 w-3.5" />
+                  <span>{date}</span>
+                </div>
+              )}
+
+              {readTime && (
+                <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                  <Clock className="h-3.5 w-3.5" />
+                  <span>{readTime}</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-        <Link to={path} className="mt-auto">
-          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all duration-200">
-            Ler mais
-          </Button>
-        </Link>
-      </div>
-    </motion.div>
+
+        {/* CONTENT */}
+        <div className="flex flex-1 flex-col p-6">
+          <h3 className="mb-3 line-clamp-2 font-['Poppins'] text-xl font-bold leading-snug text-card-foreground transition-colors duration-200 group-hover:text-accent">
+            {title}
+          </h3>
+
+          {summary && (
+            <p className="mb-6 line-clamp-3 flex-1 text-sm leading-7 text-muted-foreground">
+              {summary}
+            </p>
+          )}
+
+          {/* FOOTER */}
+          <div className="mt-auto flex items-center justify-between border-t border-border/70 pt-5">
+            <span className="text-sm font-semibold text-primary transition-colors duration-200 group-hover:text-accent">
+              Ler estudo
+            </span>
+
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:bg-accent group-hover:text-accent-foreground">
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.article>
   );
 }
 
