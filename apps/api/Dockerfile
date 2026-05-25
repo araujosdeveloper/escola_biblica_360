@@ -1,30 +1,20 @@
 
-FROM golang:1.21-alpine AS builder
+FROM alpine:3.20
+
+ARG PB_VERSION=0.30.0
+
+RUN apk add --no-cache ca-certificates unzip wget
 
 WORKDIR /app
 
-# Copiar o código fonte
-COPY . .
+RUN wget -O /tmp/pocketbase.zip "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" \
+  && unzip /tmp/pocketbase.zip -d /app \
+  && chmod +x /app/pocketbase \
+  && rm /tmp/pocketbase.zip
 
-# Construir o binário do PocketBase
-RUN go build -o pocketbase main.go
-
-FROM alpine:latest
-
-# Adicionar certificados CA para suportar requisições HTTPS
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /app
-
-# Copiar o binário construído do stage anterior
-COPY --from=builder /app/pocketbase .
-
-# Copiar diretórios de migrações e arquivos públicos
 COPY pb_migrations /app/pb_migrations
-COPY pb_public /app/pb_public
+COPY pb_hooks /app/pb_hooks
 
-# Expor a porta padrão do PocketBase
 EXPOSE 8090
 
-# Comando de execução com diretório de dados explícito
-CMD ["/app/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/app/pb_data"]
+CMD ["/app/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/app/pb_data", "--migrationsDir=/app/pb_migrations", "--hooksDir=/app/pb_hooks", "--hooksWatch=false"]

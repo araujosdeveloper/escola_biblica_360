@@ -1,0 +1,26 @@
+/// <reference path="../pb_data/types.d.ts" />
+migrate((app) => {
+  const collection = app.findCollectionByNameOrId("admin_users");
+  collection.listRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.role = 'admin')";
+  collection.viewRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.role = 'admin')";
+  collection.createRule = "@request.auth.collectionName = 'admin_users' && @request.auth.role = 'super_admin'";
+  collection.updateRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.id = id)";
+  collection.deleteRule = "@request.auth.collectionName = 'admin_users' && @request.auth.role = 'super_admin'";
+  return app.save(collection);
+}, (app) => {
+  try {
+  const collection = app.findCollectionByNameOrId("admin_users");
+  collection.listRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.role = 'admin')";
+  collection.viewRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.role = 'admin')";
+  collection.createRule = "@request.auth.collectionName = 'admin_users' && @request.auth.role = 'super_admin'";
+  collection.updateRule = "@request.auth.collectionName = 'admin_users' && (@request.auth.role = 'super_admin' || @request.auth.id = id)";
+  collection.deleteRule = "@request.auth.collectionName = 'admin_users' && @request.auth.role = 'super_admin'";
+  return app.save(collection);
+  } catch (e) {
+    if (e.message.includes("no rows in result set")) {
+      console.log("Collection not found, skipping revert");
+      return;
+    }
+    throw e;
+  }
+})
