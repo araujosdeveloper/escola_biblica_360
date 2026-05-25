@@ -1,13 +1,26 @@
+# Backend PocketBase — Deploy API
 
-# Documentação do Backend PocketBase
+Esta pasta contém a estrutura de deploy do backend PocketBase do projeto **Escola Bíblica 360**.
 
-O backend do Escola Bíblica 360 é construído usando [PocketBase](https://pocketbase.io), uma solução open-source que engloba banco de dados SQLite embutido, autenticação e armazenamento de arquivos em um único binário.
+O backend é responsável por sustentar:
 
-## Como Rodar Localmente (Desenvolvimento)
+- painel administrativo;
+- autenticação;
+- posts;
+- categorias;
+- downloads;
+- newsletter;
+- mensagens de contato;
+- biblioteca de mídia;
+- logs;
+- uploads;
+- regras de acesso;
+- migrations do banco.
 
-1. **Baixar o PocketBase:**
-   Se preferir não usar Docker localmente, baixe o executável do PocketBase compatível com seu sistema operacional.
+## Relação entre apps/api e apps/pocketbase
 
-2. **Iniciar o Servidor:**
-   No diretório `/apps/api`, rode o seguinte comando no terminal:
-   
+O projeto possui duas pastas relacionadas ao PocketBase:
+
+```txt
+apps/pocketbase
+apps/api
