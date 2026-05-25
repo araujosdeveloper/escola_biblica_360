@@ -30,6 +30,16 @@ function readText(relativePath) {
   }
 }
 
+function listFiles(relativePath) {
+  const fullPath = path.join(rootDir, relativePath);
+
+  try {
+    return fs.readdirSync(fullPath);
+  } catch (error) {
+    return [];
+  }
+}
+
 function ok(message) {
   console.log('[OK] ' + message);
 }
@@ -157,7 +167,139 @@ function checkProjectStructure() {
   if (exists('apps/pocketbase/pb_migrations')) {
     ok('Pasta de migrations encontrada em apps/pocketbase/pb_migrations');
   } else {
-    warn('Pasta apps/pocketbase/pb_migrations não encontrada');
+    fail('Pasta apps/pocketbase/pb_migrations não encontrada');
+  }
+}
+
+function checkPocketBaseMigrationConsistency() {
+  const apiMigrationsDir = 'apps/api/pb_migrations';
+  const pocketbaseMigrationsDir = 'apps/pocketbase/pb_migrations';
+
+  if (!exists(pocketbaseMigrationsDir)) {
+    fail('Pasta principal de migrations não encontrada: ' + pocketbaseMigrationsDir);
+    return;
+  }
+
+  const pocketbaseMigrations = listFiles(pocketbaseMigrationsDir).filter(
+    (fileName) => fileName.endsWith('.js') || fileName.endsWith('.js.bak')
+  );
+
+  if (pocketbaseMigrations.length === 0) {
+    fail('Nenhuma migration encontrada em apps/pocketbase/pb_migrations');
+    return;
+  }
+
+  ok(
+    'Migrations encontradas em apps/pocketbase/pb_migrations: ' +
+      pocketbaseMigrations.length
+  );
+
+  const expectedBackendCollections = [
+    'categories',
+    'posts',
+    'downloads',
+    'newsletter_subscribers',
+    'contact_messages',
+    'admin_users',
+    'media_library',
+    'logs',
+  ];
+
+  expectedBackendCollections.forEach((collectionName) => {
+    const found = pocketbaseMigrations.some((fileName) =>
+      fileName.toLowerCase().includes(collectionName.toLowerCase())
+    );
+
+    if (found) {
+      ok('Migration relacionada encontrada para: ' + collectionName);
+    } else {
+      warn(
+        'Não encontrei migration com nome relacionado a: ' +
+          collectionName +
+          '. Confira se essa coleção existe no PocketBase.'
+      );
+    }
+  });
+
+  if (!exists(apiMigrationsDir)) {
+    warn(
+      'Pasta apps/api/pb_migrations não encontrada. Se apps/api for usado no deploy, ele precisa receber as migrations reais.'
+    );
+    return;
+  }
+
+  const apiMigrations = listFiles(apiMigrationsDir).filter(
+    (fileName) => fileName.endsWith('.js') || fileName.endsWith('.js.bak')
+  );
+
+  if (apiMigrations.length === 0) {
+    warn(
+      'apps/api/pb_migrations está vazia. Não use apps/api em produção sem corrigir as migrations.'
+    );
+    return;
+  }
+
+  const hasOnlyTemplate =
+    apiMigrations.length === 1 &&
+    apiMigrations[0].toLowerCase().includes('template');
+
+  if (hasOnlyTemplate) {
+    warn(
+      'apps/api/pb_migrations contém apenas migration template. O backend real do painel admin parece estar em apps/pocketbase.'
+    );
+    return;
+  }
+
+  if (apiMigrations.length < pocketbaseMigrations.length) {
+    warn(
+      'apps/api tem menos migrations que apps/pocketbase. Confirme qual pasta será usada no deploy para não publicar backend incompleto.'
+    );
+    return;
+  }
+
+  ok('apps/api e apps/pocketbase parecem ter migrations compatíveis em quantidade.');
+}
+
+function checkDeploymentDocumentation() {
+  const deployment = readText('DEPLOYMENT.md');
+
+  if (!deployment) {
+    fail('Não foi possível ler DEPLOYMENT.md');
+    return;
+  }
+
+  const expectedMentions = [
+    'apps/pocketbase',
+    'apps/api',
+    'painel administrativo',
+    'pb_migrations',
+    'volume persistente',
+  ];
+
+  expectedMentions.forEach((text) => {
+    if (deployment.toLowerCase().includes(text.toLowerCase())) {
+      ok('DEPLOYMENT.md menciona: ' + text);
+    } else {
+      warn('DEPLOYMENT.md deveria mencionar: ' + text);
+    }
+  });
+}
+
+function checkGeneratedBuildOutput() {
+  if (exists('dist/apps/web/index.html')) {
+    ok('Build do frontend encontrado: dist/apps/web/index.html');
+  } else {
+    warn(
+      'Build do frontend não encontrado em dist/apps/web/index.html. Rode npm run build antes de publicar.'
+    );
+  }
+
+  if (exists('dist/apps/web/assets')) {
+    ok('Assets do build encontrados: dist/apps/web/assets');
+  } else {
+    warn(
+      'Pasta de assets do build não encontrada em dist/apps/web/assets. Rode npm run build antes de publicar.'
+    );
   }
 }
 
@@ -182,6 +324,18 @@ function checkGitignore() {
       warn('Regra possivelmente ausente no .gitignore: ' + rule);
     }
   });
+
+  if (gitignore.includes('dist')) {
+    ok('Regra encontrada no .gitignore: dist');
+  } else {
+    warn('Regra possivelmente ausente no .gitignore: dist');
+  }
+
+  if (gitignore.includes('pb_data_backup')) {
+    ok('Regra encontrada no .gitignore: pb_data_backup');
+  } else {
+    warn('Regra possivelmente ausente no .gitignore: pb_data_backup');
+  }
 }
 
 function printSummary() {
@@ -211,8 +365,11 @@ console.log('');
 
 checkDocumentationFiles();
 checkProjectStructure();
+checkPocketBaseMigrationConsistency();
+checkDeploymentDocumentation();
 checkPackageScripts();
 checkEnvExample();
 checkSensitiveLocalEnvFiles();
 checkGitignore();
+checkGeneratedBuildOutput();
 printSummary();
