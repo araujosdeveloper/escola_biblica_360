@@ -8,7 +8,8 @@
     "start": "concurrently --kill-others --raw \"npm run start --prefix apps/pocketbase\"",
     "lint": "concurrently --raw \"npm run lint --prefix apps/web\"",
     "validate": "node validateProduction.js",
-    "check": "npm run validate && npm run lint && npm run build"
+    "check": "npm run validate && npm run lint && npm run build",
+    "sync:pocketbase": "node scripts/sync-pocketbase-deploy.js"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
