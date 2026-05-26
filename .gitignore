@@ -46,7 +46,13 @@ apps/api/pocketbase
 *.sqlite
 *.sqlite3
 
-# Arquivos temporários
+# Arquivos compactados / artefatos
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Arquivos temporários/cache
 *.tmp
 *.temp
 .cache
