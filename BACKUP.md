@@ -1,6 +1,6 @@
 # Guia de Backup — Escola Bíblica 360
 
-Este guia explica como proteger os dados do PocketBase do projeto Escola Bíblica 360.
+Este guia explica como proteger os dados do PocketBase do projeto **Escola Bíblica 360**.
 
 O PocketBase armazena dados importantes em `pb_data`, incluindo banco SQLite, arquivos enviados, imagens, uploads e configurações locais.
 
