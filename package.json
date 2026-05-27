@@ -10,7 +10,8 @@
     "validate": "node validateProduction.js",
     "check": "npm run validate && npm run lint && npm run build",
     "sync:pocketbase": "node scripts/sync-pocketbase-deploy.js",
-    "backup:pocketbase": "node scripts/backup-pocketbase.js"
+    "backup:pocketbase": "node scripts/backup-pocketbase.js",
+    "restore:pocketbase": "node scripts/restore-pocketbase.js"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

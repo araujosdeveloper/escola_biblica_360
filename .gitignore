@@ -31,6 +31,7 @@ Thumbs.db
 apps/pocketbase/pb_data
 apps/pocketbase/pb_data_backup
 apps/pocketbase/pb_backups
+apps/pocketbase/pb_restore_safety_backups
 apps/pocketbase/pb_public
 apps/pocketbase/pocketbase.exe
 
