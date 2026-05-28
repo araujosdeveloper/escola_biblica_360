@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 
@@ -20,11 +19,10 @@ function ArticleCard({
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-border/70 bg-white shadow-lg shadow-[#0f2f45]/5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d4af37]/45 hover:shadow-2xl hover:shadow-[#0f2f45]/12"
     >
       <Link to={path} className="flex h-full flex-col">
-        {/* IMAGE */}
-        <div className="relative h-56 overflow-hidden bg-muted">
+        <div className="relative h-58 min-h-56 overflow-hidden bg-[#08131f]">
           <img
             src={
               image ||
@@ -35,31 +33,29 @@ function ArticleCard({
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/10 to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050b12]/92 via-[#0f2f45]/28 to-transparent" />
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_35%,rgba(212,175,55,0.18),transparent_34%)]" />
 
-          {/* Category */}
           {category && (
             <div className="absolute left-4 top-4">
-              <Badge className="border border-white/20 bg-white/90 text-primary shadow-sm backdrop-blur-md hover:bg-white">
+              <Badge className="rounded-full border border-[#d4af37]/40 bg-[#07131f]/75 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-[#f6d66b] shadow-lg backdrop-blur-md hover:bg-[#07131f]/80">
                 {category}
               </Badge>
             </div>
           )}
 
-          {/* Meta */}
           <div className="absolute bottom-4 left-4 right-4">
             <div className="flex flex-wrap items-center gap-3 text-xs text-white/90">
               {date && (
-                <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-md">
-                  <Calendar className="h-3.5 w-3.5" />
+                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                  <Calendar className="h-3.5 w-3.5 text-[#f6d66b]" />
                   <span>{date}</span>
                 </div>
               )}
 
               {readTime && (
-                <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-md">
-                  <Clock className="h-3.5 w-3.5" />
+                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                  <Clock className="h-3.5 w-3.5 text-[#f6d66b]" />
                   <span>{readTime}</span>
                 </div>
               )}
@@ -67,9 +63,10 @@ function ArticleCard({
           </div>
         </div>
 
-        {/* CONTENT */}
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="mb-3 line-clamp-2 font-['Poppins'] text-xl font-bold leading-snug text-card-foreground transition-colors duration-200 group-hover:text-accent">
+          <div className="mb-4 h-px w-16 bg-gradient-to-r from-[#d4af37] to-transparent" />
+
+          <h3 className="mb-3 line-clamp-2 font-['Poppins'] text-xl font-extrabold leading-snug text-[#0f2f45] transition-colors duration-200 group-hover:text-[#b38d22]">
             {title}
           </h3>
 
@@ -79,13 +76,12 @@ function ArticleCard({
             </p>
           )}
 
-          {/* FOOTER */}
           <div className="mt-auto flex items-center justify-between border-t border-border/70 pt-5">
-            <span className="text-sm font-semibold text-primary transition-colors duration-200 group-hover:text-accent">
+            <span className="text-sm font-extrabold text-[#0f2f45] transition-colors duration-200 group-hover:text-[#b38d22]">
               Ler estudo
             </span>
 
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:bg-accent group-hover:text-accent-foreground">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#b38d22] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
               <ArrowRight className="h-4 w-4" />
             </span>
           </div>
