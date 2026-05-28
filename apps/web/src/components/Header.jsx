@@ -133,12 +133,12 @@ function Header() {
     transition-all duration-200 whitespace-nowrap outline-none
     ${active
       ? 'text-[#f6d66b]'
-      : 'text-white/86 hover:text-[#f6d66b]'}
+      : 'text-white/92 hover:text-[#f6d66b]'}
   `;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#d4af37]/20 bg-[#050b12] shadow-[0_18px_50px_rgba(0,0,0,0.36)]">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_12%_0%,rgba(212,175,55,0.14),transparent_28%),linear-gradient(90deg,rgba(212,175,55,0.08),transparent_30%,transparent_70%,rgba(212,175,55,0.08))]" />
+    <header className="sticky top-0 z-50 border-b border-[#d4af37]/25 bg-[#050b12] shadow-[0_18px_50px_rgba(0,0,0,0.42)]">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_10%_0%,rgba(212,175,55,0.18),transparent_30%),linear-gradient(90deg,rgba(212,175,55,0.10),transparent_30%,transparent_70%,rgba(212,175,55,0.08))]" />
 
       <div className="container relative">
         <div className="flex h-20 items-center justify-between gap-4">
@@ -147,7 +147,7 @@ function Header() {
             className="group z-50 flex flex-shrink-0 items-center gap-3"
             aria-label="Ir para a página inicial"
           >
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d4af37]/55 bg-[#d4af37]/15 text-[#f6d66b] shadow-[0_0_28px_rgba(212,175,55,0.18)] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d4af37]/60 bg-[#d4af37]/16 text-[#f6d66b] shadow-[0_0_30px_rgba(212,175,55,0.22)] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
               <BookOpen className="h-7 w-7" />
               <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f6d66b] shadow-[0_0_18px_rgba(246,214,107,0.9)]" />
             </div>
@@ -156,7 +156,8 @@ function Header() {
               <span className="whitespace-nowrap font-['Poppins'] text-lg font-extrabold tracking-tight text-white md:text-xl">
                 Escola Bíblica <span className="text-[#f6d66b]">360</span>
               </span>
-              <span className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-white/68 md:text-[10px]">
+
+              <span className="mt-1 whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.22em] text-[#d7e6ef] md:text-[10px]">
                 Conhecimento em todas as dimensões
               </span>
             </div>
@@ -197,7 +198,7 @@ function Header() {
                       {group.title}
                     </p>
 
-                    <p className="max-w-[270px] text-sm leading-6 text-white/78">
+                    <p className="max-w-[270px] text-sm leading-6 text-white/82">
                       {group.description}
                     </p>
                   </div>
@@ -216,7 +217,7 @@ function Header() {
                         <Link
                           key={path}
                           to={path}
-                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-white/70 transition-all hover:bg-white/[0.07] hover:text-white"
+                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-white/76 transition-all hover:bg-white/[0.07] hover:text-white"
                         >
                           <span>{label}</span>
                           <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover/item:translate-x-1 group-hover/item:opacity-100" />
@@ -231,14 +232,14 @@ function Header() {
 
           <div className="hidden flex-shrink-0 items-center gap-3 xl:flex">
             <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/48" />
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/55" />
 
               <Input
                 type="search"
                 placeholder="Buscar..."
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="h-10 w-44 rounded-full border border-white/12 bg-white/[0.07] pl-10 text-sm text-white placeholder:text-white/48 transition-all focus-visible:border-[#d4af37]/45 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30 2xl:w-52"
+                className="h-10 w-44 rounded-full border border-white/14 bg-white/[0.08] pl-10 text-sm text-white placeholder:text-white/58 transition-all focus-visible:border-[#d4af37]/45 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30 2xl:w-52"
               />
             </form>
 
@@ -289,21 +290,21 @@ function Header() {
                     <p className="font-extrabold text-white">
                       Escola Bíblica <span className="text-[#f6d66b]">360</span>
                     </p>
-                    <p className="text-xs text-white/62">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#d7e6ef]">
                       Conhecimento em todas as dimensões
                     </p>
                   </div>
                 </Link>
 
                 <form onSubmit={handleSearch} className="relative">
-                  <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/48" />
+                  <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/55" />
 
                   <Input
                     type="search"
                     placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    className="h-11 w-full rounded-full border border-white/12 bg-white/[0.07] pl-10 text-white placeholder:text-white/48 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30"
+                    className="h-11 w-full rounded-full border border-white/14 bg-white/[0.08] pl-10 text-white placeholder:text-white/58 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30"
                   />
                 </form>
 
@@ -339,7 +340,7 @@ function Header() {
                         {group.title}
                       </Link>
 
-                      <p className="mb-3 text-sm leading-6 text-white/62">
+                      <p className="mb-3 text-sm leading-6 text-white/70">
                         {group.description}
                       </p>
 
@@ -349,7 +350,7 @@ function Header() {
                             key={path}
                             to={path}
                             onClick={() => setIsOpen(false)}
-                            className="rounded-xl px-3 py-2 text-sm text-white/78 transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
+                            className="rounded-xl px-3 py-2 text-sm text-white/84 transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
                           >
                             {label}
                           </Link>
