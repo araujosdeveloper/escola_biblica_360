@@ -11,6 +11,7 @@ import {
   Folder,
   GraduationCap,
   HeartHandshake,
+  Lamp,
   Map,
   Mic,
   Search,
@@ -56,7 +57,7 @@ const highlightCards = [
   {
     icon: Download,
     title: 'Downloads',
-    description: 'Recursos, apostilas e arquivos para apoiar seus estudos.',
+    description: 'Apostilas, arquivos e recursos para apoiar seus estudos.',
     path: '/downloads',
   },
 ];
@@ -65,22 +66,37 @@ const platformSteps = [
   {
     icon: Search,
     title: 'Escolha um tema',
-    description: 'Navegue por categorias como EBD, sermões, escatologia e estudos bíblicos.',
+    description: 'Navegue por estudos, EBD, sermões, escatologia, infantil e materiais para professores.',
   },
   {
     icon: BookOpen,
-    title: 'Leia com profundidade',
-    description: 'Acesse conteúdos preparados para edificação espiritual e ensino cristão.',
+    title: 'Estude com clareza',
+    description: 'Leia conteúdos organizados para edificação espiritual, ensino cristão e crescimento na fé.',
   },
   {
     icon: Download,
     title: 'Baixe materiais',
-    description: 'Use os recursos disponíveis para aulas, estudos, reuniões e discipulado.',
+    description: 'Use apostilas e arquivos de apoio para aulas, reuniões, discipulado e estudos em grupo.',
   },
   {
     icon: HeartHandshake,
     title: 'Compartilhe a Palavra',
     description: 'Leve conhecimento bíblico para sua família, classe, igreja e comunidade.',
+  },
+];
+
+const stats = [
+  {
+    value: '360°',
+    label: 'Visão completa',
+  },
+  {
+    value: 'EBD',
+    label: 'Ensino bíblico',
+  },
+  {
+    value: 'Fé',
+    label: 'Edificação diária',
   },
 ];
 
@@ -147,17 +163,14 @@ export default function HomePage() {
 
       <Header />
 
-      <section className="relative overflow-hidden bg-[#0f2f45]">
+      <section className="relative overflow-hidden bg-[#070d14] text-white">
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2070&auto=format&fit=crop"
-            alt="Bíblia aberta sobre uma mesa"
-            className="h-full w-full object-cover opacity-25"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0b2638] via-[#123a55]/95 to-[#123a55]/70" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(212,175,55,0.22),transparent_28%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(9,31,46,0.65)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(212,175,55,0.22),transparent_28%),radial-gradient(circle_at_78%_16%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(135deg,#05080d_0%,#0a1724_32%,#102f45_68%,#05080d_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.07)_0%,transparent_20%,transparent_72%,rgba(212,175,55,0.12)_100%)]" />
+          <div className="absolute left-[-12%] top-[-22%] h-[560px] w-[560px] rounded-full bg-[#d4af37]/12 blur-3xl" />
+          <div className="absolute bottom-[-24%] right-[-10%] h-[620px] w-[620px] rounded-full bg-[#3d789e]/16 blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
         </div>
 
         <div className="container relative z-10 min-h-[780px] py-24 lg:py-28">
@@ -168,16 +181,16 @@ export default function HomePage() {
               transition={{ duration: 0.75 }}
               className="max-w-3xl lg:col-span-7"
             >
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-2 text-sm font-semibold text-[#f2d675] shadow-lg shadow-black/10 backdrop-blur">
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/35 bg-[#d4af37]/10 px-4 py-2 text-sm font-semibold text-[#f6d66b] shadow-lg shadow-black/10 backdrop-blur">
                 <Sparkles className="h-4 w-4" />
-                Plataforma cristã para ensino, estudo e edificação
+                Plataforma cristã para estudo, ensino e edificação
               </div>
 
-              <h1 className="mb-7 max-w-4xl text-5xl font-extrabold leading-[1.04] tracking-tight text-white md:text-6xl lg:text-7xl">
+              <h1 className="mb-7 max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
                 Conhecimento Bíblico para uma Vida Transformada
               </h1>
 
-              <p className="mb-10 max-w-2xl text-lg leading-8 text-white/78 md:text-xl">
+              <p className="mb-10 max-w-2xl text-lg leading-8 text-white/90 drop-shadow-md md:text-xl">
                 Estudos bíblicos, lições de EBD, sermões, downloads e materiais cristãos
                 organizados para fortalecer sua fé e apoiar o ensino da Palavra.
               </p>
@@ -185,7 +198,7 @@ export default function HomePage() {
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Button
                   asChild
-                  className="h-14 rounded-xl bg-[#d4af37] px-8 text-base font-bold text-[#102f45] shadow-xl shadow-[#d4af37]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-[#e4c45a]"
+                  className="h-14 rounded-xl bg-[#d4af37] px-8 text-base font-bold text-[#08131d] shadow-xl shadow-[#d4af37]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-[#e7c65b]"
                 >
                   <Link to="/estudos-biblicos">
                     Começar Estudos
@@ -196,27 +209,22 @@ export default function HomePage() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-14 rounded-xl border-white/20 bg-white/8 px-8 text-base font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/15"
+                  className="h-14 rounded-xl border-white/20 bg-white/[0.08] px-8 text-base font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/[0.14]"
                 >
                   <Link to="/downloads">Ver Materiais</Link>
                 </Button>
               </div>
 
               <div className="mt-12 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
-                  <p className="text-3xl font-extrabold text-white">360°</p>
-                  <p className="mt-1 text-sm text-white/65">Conteúdo cristão organizado</p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
-                  <p className="text-3xl font-extrabold text-white">EBD</p>
-                  <p className="mt-1 text-sm text-white/65">Materiais para ensino bíblico</p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
-                  <p className="text-3xl font-extrabold text-white">Fé</p>
-                  <p className="mt-1 text-sm text-white/65">Edificação para todos os dias</p>
-                </div>
+                {stats.map((item) => (
+                  <div
+                    key={item.value}
+                    className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 backdrop-blur"
+                  >
+                    <p className="text-3xl font-extrabold text-white">{item.value}</p>
+                    <p className="mt-1 text-sm text-white/75">{item.label}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -227,26 +235,58 @@ export default function HomePage() {
               className="hidden lg:col-span-5 lg:block"
             >
               <div className="relative">
-                <div className="absolute -inset-10 rounded-full bg-[#d4af37]/10 blur-3xl" />
+                <div className="absolute -inset-8 rounded-full bg-[#d4af37]/10 blur-3xl" />
 
-                <div className="relative overflow-hidden rounded-[34px] border border-white/12 bg-white/10 shadow-2xl backdrop-blur">
-                  <img
-                    src="https://images.unsplash.com/photo-1519491050282-cf00c82424b4?q=80&w=1974&auto=format&fit=crop"
-                    alt="Pessoa estudando a Bíblia"
-                    className="h-[560px] w-full object-cover"
-                  />
+                <div className="relative overflow-hidden rounded-[34px] border border-white/12 bg-white/[0.08] p-6 shadow-2xl backdrop-blur-xl">
+                  <div className="absolute right-8 top-8 h-28 w-28 rounded-full border border-[#d4af37]/30" />
+                  <div className="absolute right-14 top-14 h-16 w-16 rounded-full border border-white/20" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b2638]/85 via-transparent to-transparent" />
+                  <div className="relative rounded-[28px] border border-white/12 bg-gradient-to-br from-white/[0.12] to-white/[0.04] p-8">
+                    <div className="mb-10 flex items-center justify-between">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37] text-[#08131d] shadow-xl shadow-[#d4af37]/20">
+                        <BookOpen className="h-8 w-8" />
+                      </div>
 
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="rounded-3xl border border-white/12 bg-white/12 p-6 shadow-xl backdrop-blur-xl">
-                      <p className="mb-2 text-sm font-semibold uppercase tracking-[0.22em] text-[#f2d675]">
-                        Palavra que edifica
-                      </p>
+                      <span className="rounded-full border border-white/12 bg-white/[0.08] px-4 py-2 text-sm font-semibold text-white/80">
+                        EB360
+                      </span>
+                    </div>
 
-                      <h3 className="text-2xl font-extrabold leading-tight text-white">
-                        Recursos para crescer na fé, ensinar melhor e servir com excelência.
-                      </h3>
+                    <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-[#f6d66b]">
+                      Palavra que ilumina
+                    </p>
+
+                    <h2 className="mb-6 text-4xl font-extrabold leading-tight text-white">
+                      Cresça na graça e no conhecimento.
+                    </h2>
+
+                    <p className="mb-8 leading-8 text-white/78">
+                      Uma plataforma para estudar, ensinar e compartilhar conteúdos bíblicos
+                      com beleza, organização e propósito.
+                    </p>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/15 p-4">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/15 text-[#f6d66b]">
+                          <Lamp className="h-5 w-5" />
+                        </div>
+
+                        <div>
+                          <p className="font-bold text-white">Ensino com clareza</p>
+                          <p className="text-sm text-white/60">Conteúdo bíblico organizado por tema.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/15 p-4">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/15 text-[#f6d66b]">
+                          <ShieldCheck className="h-5 w-5" />
+                        </div>
+
+                        <div>
+                          <p className="font-bold text-white">Base cristã sólida</p>
+                          <p className="text-sm text-white/60">Estudos para edificação e serviço.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -254,12 +294,12 @@ export default function HomePage() {
                 <div className="absolute -bottom-8 -left-8 rounded-3xl border border-white/12 bg-white p-5 shadow-2xl">
                   <div className="flex items-center gap-4">
                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0f2f45] text-[#d4af37]">
-                      <ShieldCheck className="h-7 w-7" />
+                      <CheckCircle2 className="h-7 w-7" />
                     </div>
 
                     <div>
                       <p className="text-sm text-muted-foreground">Conteúdo com propósito</p>
-                      <p className="text-lg font-extrabold text-[#0f2f45]">Ensino bíblico confiável</p>
+                      <p className="text-lg font-extrabold text-[#0f2f45]">Fé, ensino e prática</p>
                     </div>
                   </div>
                 </div>
@@ -377,7 +417,7 @@ export default function HomePage() {
                     {featuredPost.title}
                   </h2>
 
-                  <p className="mb-8 line-clamp-5 leading-8 text-white/75">
+                  <p className="mb-8 line-clamp-5 leading-8 text-white/80">
                     {featuredPost.excerpt}
                   </p>
 
@@ -420,7 +460,7 @@ export default function HomePage() {
                     <div className="absolute bottom-6 left-6 right-6">
                       <div className="flex items-center justify-between gap-4 rounded-3xl border border-white/12 bg-white/12 p-5 backdrop-blur-xl">
                         <div>
-                          <p className="mb-1 text-sm text-white/70">Leitura recomendada</p>
+                          <p className="mb-1 text-sm text-white/75">Leitura recomendada</p>
                           <h3 className="line-clamp-2 text-xl font-extrabold leading-tight text-white md:text-2xl">
                             {featuredPost.title}
                           </h3>
@@ -517,7 +557,7 @@ export default function HomePage() {
 
               <Button
                 asChild
-                className="h-13 rounded-xl bg-[#0f2f45] px-7 font-bold text-white hover:bg-[#143d59]"
+                className="h-12 rounded-xl bg-[#0f2f45] px-7 font-bold text-white hover:bg-[#143d59]"
               >
                 <Link to="/downloads">
                   Acessar materiais
@@ -560,7 +600,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#0b2638] via-[#0f2f45] to-[#153f5c] py-24">
+      <section className="bg-gradient-to-br from-[#070d14] via-[#0f2f45] to-[#153f5c] py-24">
         <div className="container">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37] text-[#0f2f45] shadow-xl shadow-[#d4af37]/20">
@@ -571,7 +611,7 @@ export default function HomePage() {
               Receba conteúdos bíblicos exclusivos
             </h2>
 
-            <p className="mx-auto mb-10 max-w-2xl text-lg leading-8 text-white/78">
+            <p className="mx-auto mb-10 max-w-2xl text-lg leading-8 text-white/85">
               Inscreva-se para receber atualizações, devocionais e novos materiais
               de estudo diretamente na sua caixa de entrada.
             </p>
