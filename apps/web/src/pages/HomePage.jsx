@@ -197,11 +197,10 @@ export default function HomePage() {
           <div className="absolute left-[-12%] top-[-18%] h-[520px] w-[520px] rounded-full bg-[#d4af37]/12 blur-3xl" />
           <div className="absolute bottom-[-26%] right-[-10%] h-[620px] w-[620px] rounded-full bg-[#1b5b7d]/18 blur-3xl" />
           <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
-          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background to-transparent" />
         </div>
 
-        <div className="container relative z-10 py-20 lg:py-24">
-          <div className="grid min-h-[560px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
+        <div className="container relative z-10 pb-16 pt-20 lg:pb-20 lg:pt-24">
+          <div className="grid min-h-[540px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
@@ -321,7 +320,7 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="relative z-20 -mb-28 mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="relative z-20 mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
             {highlightCards.map((card, index) => {
               const Icon = card.icon;
 
@@ -360,9 +359,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#050b12] pb-14 pt-28 text-white">
+      <section className="border-t border-white/10 bg-[#050b12] py-20 text-white">
         <div className="container">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-4">
               <span className="mb-4 inline-block text-sm font-bold uppercase tracking-[0.28em] text-[#f6d66b]">
                 Conteúdos selecionados
