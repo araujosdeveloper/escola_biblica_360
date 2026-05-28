@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -108,13 +108,6 @@ function Header() {
     setIsOpen(false);
   }, [currentPath]);
 
-  const allMenuPaths = useMemo(() => {
-    return menuGroups.flatMap((group) => [
-      group.path,
-      ...group.items.map(([, path]) => path),
-    ]);
-  }, []);
-
   const handleSearch = (event) => {
     event.preventDefault();
 
@@ -140,12 +133,12 @@ function Header() {
     transition-all duration-200 whitespace-nowrap outline-none
     ${active
       ? 'text-[#f6d66b]'
-      : 'text-white/82 hover:text-[#f6d66b]'}
+      : 'text-white/86 hover:text-[#f6d66b]'}
   `;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050b12]/88 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-2xl">
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(212,175,55,0.08),transparent_28%,transparent_72%,rgba(212,175,55,0.08))]" />
+    <header className="sticky top-0 z-50 border-b border-[#d4af37]/20 bg-[#050b12] shadow-[0_18px_50px_rgba(0,0,0,0.36)]">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_12%_0%,rgba(212,175,55,0.14),transparent_28%),linear-gradient(90deg,rgba(212,175,55,0.08),transparent_30%,transparent_70%,rgba(212,175,55,0.08))]" />
 
       <div className="container relative">
         <div className="flex h-20 items-center justify-between gap-4">
@@ -154,16 +147,16 @@ function Header() {
             className="group z-50 flex flex-shrink-0 items-center gap-3"
             aria-label="Ir para a página inicial"
           >
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#f6d66b] shadow-lg shadow-[#d4af37]/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
-              <BookOpen className="h-6 w-6" />
-              <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f6d66b] shadow-[0_0_18px_rgba(246,214,107,0.8)]" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d4af37]/55 bg-[#d4af37]/15 text-[#f6d66b] shadow-[0_0_28px_rgba(212,175,55,0.18)] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
+              <BookOpen className="h-7 w-7" />
+              <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f6d66b] shadow-[0_0_18px_rgba(246,214,107,0.9)]" />
             </div>
 
             <div className="flex flex-col leading-tight">
-              <span className="whitespace-nowrap font-['Poppins'] text-base font-extrabold tracking-tight text-white md:text-lg">
+              <span className="whitespace-nowrap font-['Poppins'] text-lg font-extrabold tracking-tight text-white md:text-xl">
                 Escola Bíblica <span className="text-[#f6d66b]">360</span>
               </span>
-              <span className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.18em] text-white/52 md:text-[10px]">
+              <span className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-white/68 md:text-[10px]">
                 Conhecimento em todas as dimensões
               </span>
             </div>
@@ -193,10 +186,10 @@ function Header() {
 
                 <DropdownMenuContent
                   align="center"
-                  className="w-[390px] overflow-hidden rounded-3xl border border-[#d4af37]/20 bg-[#07131f]/96 p-0 text-white shadow-2xl shadow-black/40 backdrop-blur-2xl"
+                  className="w-[390px] overflow-hidden rounded-3xl border border-[#d4af37]/25 bg-[#07131f]/98 p-0 text-white shadow-2xl shadow-black/45 backdrop-blur-2xl"
                 >
-                  <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_35%),linear-gradient(135deg,#08131f,#102f45)] p-6">
-                    <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/30 bg-white/5 text-[#f6d66b]">
+                  <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.24),transparent_35%),linear-gradient(135deg,#08131f,#102f45)] p-6">
+                    <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/35 bg-white/5 text-[#f6d66b]">
                       <BookOpen className="h-7 w-7" />
                     </div>
 
@@ -204,7 +197,7 @@ function Header() {
                       {group.title}
                     </p>
 
-                    <p className="max-w-[270px] text-sm leading-6 text-white/75">
+                    <p className="max-w-[270px] text-sm leading-6 text-white/78">
                       {group.description}
                     </p>
                   </div>
@@ -212,7 +205,7 @@ function Header() {
                   <div className="p-3">
                     <Link
                       to={group.path}
-                      className="mb-2 flex items-center justify-between rounded-2xl border border-[#d4af37]/20 bg-[#d4af37]/10 px-4 py-3 text-sm font-bold text-[#f6d66b] transition-colors hover:bg-[#d4af37]/16"
+                      className="mb-2 flex items-center justify-between rounded-2xl border border-[#d4af37]/25 bg-[#d4af37]/12 px-4 py-3 text-sm font-bold text-[#f6d66b] transition-colors hover:bg-[#d4af37]/18"
                     >
                       Ver tudo em {group.title}
                       <ArrowRight className="h-4 w-4" />
@@ -223,7 +216,7 @@ function Header() {
                         <Link
                           key={path}
                           to={path}
-                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-white/68 transition-all hover:bg-white/[0.07] hover:text-white"
+                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-white/70 transition-all hover:bg-white/[0.07] hover:text-white"
                         >
                           <span>{label}</span>
                           <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover/item:translate-x-1 group-hover/item:opacity-100" />
@@ -238,20 +231,20 @@ function Header() {
 
           <div className="hidden flex-shrink-0 items-center gap-3 xl:flex">
             <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/48" />
 
               <Input
                 type="search"
                 placeholder="Buscar..."
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="h-10 w-44 rounded-full border border-white/10 bg-white/[0.06] pl-10 text-sm text-white placeholder:text-white/42 transition-all focus-visible:border-[#d4af37]/40 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30 2xl:w-52"
+                className="h-10 w-44 rounded-full border border-white/12 bg-white/[0.07] pl-10 text-sm text-white placeholder:text-white/48 transition-all focus-visible:border-[#d4af37]/45 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30 2xl:w-52"
               />
             </form>
 
             <Button
               asChild
-              className="h-11 rounded-xl bg-gradient-to-r from-[#f6d66b] to-[#c89525] px-5 text-sm font-extrabold text-[#07131f] shadow-lg shadow-[#d4af37]/15 hover:from-[#ffe184] hover:to-[#d4af37]"
+              className="h-11 rounded-xl bg-gradient-to-r from-[#f6d66b] to-[#c89525] px-5 text-sm font-extrabold text-[#07131f] shadow-lg shadow-[#d4af37]/18 hover:from-[#ffe184] hover:to-[#d4af37]"
             >
               <Link to="/estudos-biblicos">
                 Começar Estudos
@@ -286,31 +279,31 @@ function Header() {
                 <Link
                   to="/"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 rounded-2xl border border-[#d4af37]/20 bg-white/[0.04] p-4"
+                  className="flex items-center gap-3 rounded-2xl border border-[#d4af37]/25 bg-white/[0.05] p-4"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
-                    <BookOpen className="h-6 w-6" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d4af37]/15 text-[#f6d66b]">
+                    <BookOpen className="h-7 w-7" />
                   </div>
 
                   <div>
                     <p className="font-extrabold text-white">
                       Escola Bíblica <span className="text-[#f6d66b]">360</span>
                     </p>
-                    <p className="text-xs text-white/55">
+                    <p className="text-xs text-white/62">
                       Conhecimento em todas as dimensões
                     </p>
                   </div>
                 </Link>
 
                 <form onSubmit={handleSearch} className="relative">
-                  <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
+                  <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/48" />
 
                   <Input
                     type="search"
                     placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    className="h-11 w-full rounded-full border border-white/10 bg-white/[0.06] pl-10 text-white placeholder:text-white/42 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30"
+                    className="h-11 w-full rounded-full border border-white/12 bg-white/[0.07] pl-10 text-white placeholder:text-white/48 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30"
                   />
                 </form>
 
@@ -346,7 +339,7 @@ function Header() {
                         {group.title}
                       </Link>
 
-                      <p className="mb-3 text-sm leading-6 text-white/58">
+                      <p className="mb-3 text-sm leading-6 text-white/62">
                         {group.description}
                       </p>
 
@@ -356,7 +349,7 @@ function Header() {
                             key={path}
                             to={path}
                             onClick={() => setIsOpen(false)}
-                            className="rounded-xl px-3 py-2 text-sm text-white/76 transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
+                            className="rounded-xl px-3 py-2 text-sm text-white/78 transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
                           >
                             {label}
                           </Link>
