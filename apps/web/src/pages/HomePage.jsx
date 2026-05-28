@@ -306,8 +306,14 @@ export default function HomePage() {
                       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="mb-1 text-sm font-extrabold text-white">{card.title}</h3>
-                      <p className="text-xs leading-5 text-white/72">{card.description}</p>
+
+                      <h3 className="mb-1 text-sm font-extrabold text-white">
+                        {card.title}
+                      </h3>
+
+                      <p className="text-xs leading-5 text-white/72">
+                        {card.description}
+                      </p>
                     </div>
                   );
                 })}
@@ -354,21 +360,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#050b12] pb-24 pt-44 text-white">
+      <section className="bg-[#050b12] pb-14 pt-28 text-white">
         <div className="container">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-4">
               <span className="mb-4 inline-block text-sm font-bold uppercase tracking-[0.28em] text-[#f6d66b]">
                 Conteúdos selecionados
               </span>
 
-              <h2 className="mb-6 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+              <h2 className="mb-5 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
                 Explore conteúdos para crescer na Palavra
               </h2>
 
               <div className="mb-6 h-px w-36 bg-gradient-to-r from-[#d4af37] to-transparent" />
 
-              <p className="mb-8 text-lg leading-8 text-white/70">
+              <p className="mb-6 text-base leading-7 text-white/70">
                 Uma seleção de estudos, mensagens e materiais para fortalecer sua caminhada com Deus.
               </p>
 
@@ -402,7 +408,7 @@ export default function HomePage() {
                         to={`/categoria/${category.slug}`}
                         className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-6 shadow-xl shadow-black/20 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-[#d4af37]/45 hover:bg-white/[0.09]"
                       >
-                        <div className="mb-8 flex items-center justify-between">
+                        <div className="mb-5 flex items-center justify-between">
                           <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/35 bg-[#d4af37]/10 text-[#f6d66b]">
                             <IconComponent className="h-7 w-7" />
                           </div>
