@@ -11,7 +11,6 @@ import {
   Folder,
   GraduationCap,
   HeartHandshake,
-  Lamp,
   Map,
   Mic,
   Search,
@@ -45,20 +44,50 @@ const highlightCards = [
   {
     icon: BookOpen,
     title: 'Estudos Bíblicos',
-    description: 'Conteúdos organizados para aprofundar seu conhecimento da Palavra.',
+    description: 'Estudos completos e profundos para crescer na Palavra.',
     path: '/estudos-biblicos',
+    cta: 'Explorar estudos',
   },
   {
-    icon: GraduationCap,
-    title: 'Lições para EBD',
-    description: 'Materiais úteis para professores, alunos e líderes cristãos.',
+    icon: Users,
+    title: 'Lições EBD',
+    description: 'Lições práticas e objetivas para todas as faixas etárias.',
     path: '/licoes-ebd',
+    cta: 'Ver lições',
+  },
+  {
+    icon: Download,
+    title: 'Downloads Cristãos',
+    description: 'Materiais gratuitos para apoiar seu estudo e ensino.',
+    path: '/downloads',
+    cta: 'Acessar downloads',
+  },
+];
+
+const floatingCards = [
+  {
+    icon: BookOpen,
+    title: 'Estudos Bíblicos',
+    description: 'Aprofunde seu conhecimento da Palavra.',
+    className: 'left-2 top-8',
+  },
+  {
+    icon: Users,
+    title: 'Lições EBD',
+    description: 'Conteúdo prático para classes e idades.',
+    className: 'right-2 top-14',
+  },
+  {
+    icon: Mic,
+    title: 'Sermões',
+    description: 'Mensagens que edificam e transformam.',
+    className: 'left-[-20px] bottom-32',
   },
   {
     icon: Download,
     title: 'Downloads',
-    description: 'Apostilas, arquivos e recursos para apoiar seus estudos.',
-    path: '/downloads',
+    description: 'Materiais para estudo e ensino.',
+    className: 'right-[-16px] bottom-24',
   },
 ];
 
@@ -88,15 +117,15 @@ const platformSteps = [
 const stats = [
   {
     value: '360°',
-    label: 'Visão completa',
+    label: 'Conteúdo cristão organizado',
   },
   {
     value: 'EBD',
-    label: 'Ensino bíblico',
+    label: 'Materiais para ensino bíblico',
   },
   {
     value: 'Fé',
-    label: 'Edificação diária',
+    label: 'Edificação para todos os dias',
   },
 ];
 
@@ -163,42 +192,47 @@ export default function HomePage() {
 
       <Header />
 
-      <section className="relative overflow-hidden bg-[#070d14] text-white">
+      <section className="relative overflow-hidden bg-[#050b12] text-white">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(212,175,55,0.22),transparent_28%),radial-gradient(circle_at_78%_16%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(135deg,#05080d_0%,#0a1724_32%,#102f45_68%,#05080d_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.07)_0%,transparent_20%,transparent_72%,rgba(212,175,55,0.12)_100%)]" />
-          <div className="absolute left-[-12%] top-[-22%] h-[560px] w-[560px] rounded-full bg-[#d4af37]/12 blur-3xl" />
-          <div className="absolute bottom-[-24%] right-[-10%] h-[620px] w-[620px] rounded-full bg-[#3d789e]/16 blur-3xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(212,175,55,0.22),transparent_28%),radial-gradient(circle_at_78%_28%,rgba(40,115,155,0.22),transparent_30%),linear-gradient(135deg,#04070c_0%,#07131f_34%,#0e2b41_68%,#04070c_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.07)_0%,transparent_22%,transparent_72%,rgba(212,175,55,0.12)_100%)]" />
+          <div className="absolute left-[-12%] top-[-18%] h-[560px] w-[560px] rounded-full bg-[#d4af37]/12 blur-3xl" />
+          <div className="absolute bottom-[-26%] right-[-10%] h-[680px] w-[680px] rounded-full bg-[#1b5b7d]/18 blur-3xl" />
           <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-background to-transparent" />
         </div>
 
-        <div className="container relative z-10 min-h-[780px] py-24 lg:py-28">
-          <div className="grid min-h-[620px] grid-cols-1 items-center gap-14 lg:grid-cols-12">
+        <div className="container relative z-10 min-h-[820px] py-24 lg:py-28">
+          <div className="grid min-h-[650px] grid-cols-1 items-center gap-14 lg:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75 }}
-              className="max-w-3xl lg:col-span-7"
+              className="max-w-4xl lg:col-span-6"
             >
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/35 bg-[#d4af37]/10 px-4 py-2 text-sm font-semibold text-[#f6d66b] shadow-lg shadow-black/10 backdrop-blur">
-                <Sparkles className="h-4 w-4" />
-                Plataforma cristã para estudo, ensino e edificação
+              <div className="mb-8 flex items-center gap-4">
+                <span className="text-xs font-bold uppercase tracking-[0.32em] text-[#f6d66b]">
+                  Aprenda. Ensine. Transforme.
+                </span>
+                <span className="hidden h-px w-28 bg-gradient-to-r from-[#d4af37] to-transparent sm:block" />
               </div>
 
               <h1 className="mb-7 max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
-                Conhecimento Bíblico para uma Vida Transformada
+                Conhecimento Bíblico para uma{' '}
+                <span className="bg-gradient-to-r from-[#f6d66b] via-[#d4af37] to-[#a9791e] bg-clip-text text-transparent">
+                  Vida Transformada
+                </span>
               </h1>
 
-              <p className="mb-10 max-w-2xl text-lg leading-8 text-white/90 drop-shadow-md md:text-xl">
-                Estudos bíblicos, lições de EBD, sermões, downloads e materiais cristãos
-                organizados para fortalecer sua fé e apoiar o ensino da Palavra.
+              <p className="mb-10 max-w-2xl text-lg leading-8 text-white/88 drop-shadow-md md:text-xl">
+                Estudos, lições, sermões e materiais cristãos organizados para fortalecer sua fé
+                e apoiar o ensino da Palavra.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Button
                   asChild
-                  className="h-14 rounded-xl bg-[#d4af37] px-8 text-base font-bold text-[#08131d] shadow-xl shadow-[#d4af37]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-[#e7c65b]"
+                  className="h-14 rounded-xl bg-gradient-to-r from-[#f6d66b] to-[#c89525] px-8 text-base font-bold text-[#07131f] shadow-xl shadow-[#d4af37]/20 transition-all duration-300 hover:scale-[1.02] hover:from-[#ffe184] hover:to-[#d4af37]"
                 >
                   <Link to="/estudos-biblicos">
                     Começar Estudos
@@ -209,9 +243,12 @@ export default function HomePage() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-14 rounded-xl border-white/20 bg-white/[0.08] px-8 text-base font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/[0.14]"
+                  className="h-14 rounded-xl border-[#d4af37]/35 bg-white/[0.04] px-8 text-base font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/[0.10]"
                 >
-                  <Link to="/downloads">Ver Materiais</Link>
+                  <Link to="/downloads">
+                    Ver Materiais
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
                 </Button>
               </div>
 
@@ -219,10 +256,10 @@ export default function HomePage() {
                 {stats.map((item) => (
                   <div
                     key={item.value}
-                    className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 backdrop-blur"
+                    className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur"
                   >
                     <p className="text-3xl font-extrabold text-white">{item.value}</p>
-                    <p className="mt-1 text-sm text-white/75">{item.label}</p>
+                    <p className="mt-1 text-sm text-white/72">{item.label}</p>
                   </div>
                 ))}
               </div>
@@ -232,82 +269,55 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="hidden lg:col-span-5 lg:block"
+              className="hidden lg:col-span-6 lg:block"
             >
-              <div className="relative">
-                <div className="absolute -inset-8 rounded-full bg-[#d4af37]/10 blur-3xl" />
+              <div className="relative h-[590px]">
+                <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d4af37]/25" />
+                <div className="absolute left-1/2 top-1/2 h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+                <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
 
-                <div className="relative overflow-hidden rounded-[34px] border border-white/12 bg-white/[0.08] p-6 shadow-2xl backdrop-blur-xl">
-                  <div className="absolute right-8 top-8 h-28 w-28 rounded-full border border-[#d4af37]/30" />
-                  <div className="absolute right-14 top-14 h-16 w-16 rounded-full border border-white/20" />
-
-                  <div className="relative rounded-[28px] border border-white/12 bg-gradient-to-br from-white/[0.12] to-white/[0.04] p-8">
-                    <div className="mb-10 flex items-center justify-between">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37] text-[#08131d] shadow-xl shadow-[#d4af37]/20">
-                        <BookOpen className="h-8 w-8" />
-                      </div>
-
-                      <span className="rounded-full border border-white/12 bg-white/[0.08] px-4 py-2 text-sm font-semibold text-white/80">
-                        EB360
-                      </span>
-                    </div>
-
-                    <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-[#f6d66b]">
-                      Palavra que ilumina
+                <div className="absolute left-1/2 top-[47%] flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/35 bg-black/25 text-[#f6d66b] shadow-2xl shadow-[#d4af37]/20 backdrop-blur-xl">
+                  <div className="text-center">
+                    <p className="text-5xl font-extrabold">360°</p>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.22em] text-white/70">
+                      Palavra
                     </p>
+                  </div>
+                </div>
 
-                    <h2 className="mb-6 text-4xl font-extrabold leading-tight text-white">
-                      Cresça na graça e no conhecimento.
-                    </h2>
+                <div className="absolute bottom-[78px] left-1/2 w-[520px] -translate-x-1/2">
+                  <div className="relative mx-auto flex h-44 w-[460px] items-end justify-center rounded-[50%] border border-[#d4af37]/25 bg-black/20 shadow-2xl shadow-[#d4af37]/10">
+                    <div className="absolute bottom-16 h-28 w-56 rounded-t-full bg-gradient-to-t from-[#d4af37]/25 via-[#f6d66b]/18 to-transparent blur-2xl" />
 
-                    <p className="mb-8 leading-8 text-white/78">
-                      Uma plataforma para estudar, ensinar e compartilhar conteúdos bíblicos
-                      com beleza, organização e propósito.
-                    </p>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/15 p-4">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/15 text-[#f6d66b]">
-                          <Lamp className="h-5 w-5" />
-                        </div>
-
-                        <div>
-                          <p className="font-bold text-white">Ensino com clareza</p>
-                          <p className="text-sm text-white/60">Conteúdo bíblico organizado por tema.</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/15 p-4">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/15 text-[#f6d66b]">
-                          <ShieldCheck className="h-5 w-5" />
-                        </div>
-
-                        <div>
-                          <p className="font-bold text-white">Base cristã sólida</p>
-                          <p className="text-sm text-white/60">Estudos para edificação e serviço.</p>
-                        </div>
-                      </div>
+                    <div className="relative mb-14 flex items-end gap-2">
+                      <div className="h-28 w-32 origin-bottom-right -skew-y-6 rounded-l-2xl border border-[#d4af37]/50 bg-gradient-to-br from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
+                      <div className="h-28 w-32 origin-bottom-left skew-y-6 rounded-r-2xl border border-[#d4af37]/50 bg-gradient-to-bl from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
+                      <div className="absolute left-1/2 top-0 h-32 w-px -translate-x-1/2 bg-[#8b6218]" />
                     </div>
                   </div>
                 </div>
 
-                <div className="absolute -bottom-8 -left-8 rounded-3xl border border-white/12 bg-white p-5 shadow-2xl">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0f2f45] text-[#d4af37]">
-                      <CheckCircle2 className="h-7 w-7" />
-                    </div>
+                {floatingCards.map((card) => {
+                  const Icon = card.icon;
 
-                    <div>
-                      <p className="text-sm text-muted-foreground">Conteúdo com propósito</p>
-                      <p className="text-lg font-extrabold text-[#0f2f45]">Fé, ensino e prática</p>
+                  return (
+                    <div
+                      key={card.title}
+                      className={`absolute ${card.className} w-56 rounded-2xl border border-[#d4af37]/30 bg-white/[0.07] p-5 shadow-2xl shadow-black/25 backdrop-blur-xl`}
+                    >
+                      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="mb-1 font-extrabold text-white">{card.title}</h3>
+                      <p className="text-sm leading-6 text-white/72">{card.description}</p>
                     </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
 
-          <div className="relative z-20 -mb-40 mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div className="relative z-20 -mb-40 mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
             {highlightCards.map((card, index) => {
               const Icon = card.icon;
 
@@ -320,22 +330,22 @@ export default function HomePage() {
                 >
                   <Link
                     to={card.path}
-                    className="group block h-full rounded-2xl border border-border/60 bg-white p-6 shadow-2xl shadow-[#0f2f45]/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                    className="group block h-full rounded-3xl border border-[#d4af37]/35 bg-[#08131f]/85 p-7 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#f6d66b]/60 hover:bg-[#0d2032]"
                   >
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0f2f45] text-[#d4af37] transition-colors duration-300 group-hover:bg-[#d4af37] group-hover:text-[#0f2f45]">
-                      <Icon className="h-7 w-7" />
+                    <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#d4af37]/45 bg-[#d4af37]/10 text-[#f6d66b] transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
+                      <Icon className="h-8 w-8" />
                     </div>
 
-                    <h3 className="mb-2 text-xl font-extrabold text-[#0f2f45]">
+                    <h3 className="mb-2 text-2xl font-extrabold text-white">
                       {card.title}
                     </h3>
 
-                    <p className="mb-5 leading-7 text-muted-foreground">
+                    <p className="mb-5 leading-7 text-white/68">
                       {card.description}
                     </p>
 
-                    <span className="inline-flex items-center gap-2 text-sm font-bold text-[#b38d22]">
-                      Acessar conteúdo
+                    <span className="inline-flex items-center gap-2 text-sm font-bold text-[#f6d66b]">
+                      {card.cta}
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </Link>
@@ -346,52 +356,90 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-background pb-24 pt-56">
+      <section className="bg-[#050b12] pb-24 pt-56 text-white">
         <div className="container">
-          <div className="mb-14 max-w-3xl">
-            <span className="mb-3 inline-block text-sm font-bold uppercase tracking-[0.22em] text-[#b38d22]">
-              Áreas de estudo
-            </span>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-4">
+              <span className="mb-4 inline-block text-sm font-bold uppercase tracking-[0.28em] text-[#f6d66b]">
+                Conteúdos selecionados
+              </span>
 
-            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl">
-              Explore conteúdos para crescer na Palavra
-            </h2>
+              <h2 className="mb-6 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+                Explore conteúdos para crescer na Palavra
+              </h2>
 
-            <p className="text-lg leading-8 text-muted-foreground">
-              Encontre estudos, lições e materiais organizados por temas para facilitar
-              sua jornada de aprendizado bíblico.
-            </p>
-          </div>
+              <div className="mb-6 h-px w-36 bg-gradient-to-r from-[#d4af37] to-transparent" />
 
-          {loading ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[...Array(6)].map((_, index) => (
-                <Skeleton key={index} className="h-48 w-full rounded-2xl" />
-              ))}
+              <p className="mb-8 text-lg leading-8 text-white/70">
+                Uma seleção de estudos, mensagens e materiais para fortalecer sua caminhada com Deus.
+              </p>
+
+              <Button
+                asChild
+                variant="outline"
+                className="h-12 rounded-xl border-[#d4af37]/45 bg-transparent px-6 font-bold text-[#f6d66b] hover:bg-[#d4af37]/10"
+              >
+                <Link to="/estudos-biblicos">
+                  Ver todos os conteúdos
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-          ) : categories.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {categories.map((category, index) => {
-                const IconComponent = iconMap[category.icon] || Folder;
 
-                return (
-                  <CategoryCard
-                    key={category.id}
-                    icon={IconComponent}
-                    title={category.name}
-                    description={category.description}
-                    path={`/categoria/${category.slug}`}
-                    index={index}
+            <div className="lg:col-span-8">
+              {loading ? (
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {[...Array(6)].map((_, index) => (
+                    <Skeleton key={index} className="h-48 w-full rounded-2xl bg-white/10" />
+                  ))}
+                </div>
+              ) : categories.length > 0 ? (
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {categories.map((category, index) => {
+                    const IconComponent = iconMap[category.icon] || Folder;
+
+                    return (
+                      <Link
+                        key={category.id}
+                        to={`/categoria/${category.slug}`}
+                        className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-6 shadow-xl shadow-black/20 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-[#d4af37]/45 hover:bg-white/[0.09]"
+                      >
+                        <div className="mb-8 flex items-center justify-between">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/35 bg-[#d4af37]/10 text-[#f6d66b]">
+                            <IconComponent className="h-7 w-7" />
+                          </div>
+
+                          <span className="text-sm font-bold text-white/30">
+                            0{index + 1}
+                          </span>
+                        </div>
+
+                        <h3 className="mb-3 text-xl font-extrabold text-white">
+                          {category.name}
+                        </h3>
+
+                        <p className="line-clamp-3 leading-7 text-white/64">
+                          {category.description || 'Conteúdo bíblico organizado para apoiar seus estudos.'}
+                        </p>
+
+                        <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#f6d66b]">
+                          Acessar
+                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8">
+                  <EmptyState
+                    title="Nenhuma categoria disponível"
+                    message="Não há categorias cadastradas no momento."
                   />
-                );
-              })}
+                </div>
+              )}
             </div>
-          ) : (
-            <EmptyState
-              title="Nenhuma categoria disponível"
-              message="Não há categorias cadastradas no momento."
-            />
-          )}
+          </div>
         </div>
       </section>
 
@@ -600,7 +648,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#070d14] via-[#0f2f45] to-[#153f5c] py-24">
+      <section className="bg-gradient-to-br from-[#050b12] via-[#0f2f45] to-[#153f5c] py-24">
         <div className="container">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d4af37] text-[#0f2f45] shadow-xl shadow-[#d4af37]/20">
