@@ -1,12 +1,11 @@
-
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  Search,
+  ArrowRight,
   BookOpen,
   ChevronDown,
   Menu,
-  ArrowRight,
+  Search,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -137,58 +136,75 @@ function Header() {
   };
 
   const navLinkClass = (active = false) => `
-    relative inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-xs xl:text-sm font-semibold
+    group relative inline-flex items-center gap-1.5 px-2.5 py-2 text-xs xl:text-sm font-semibold
     transition-all duration-200 whitespace-nowrap outline-none
     ${active
-      ? 'text-accent bg-primary-medium/70'
-      : 'text-primary-foreground/85 hover:text-accent hover:bg-primary-medium/60'}
+      ? 'text-[#f6d66b]'
+      : 'text-white/82 hover:text-[#f6d66b]'}
   `;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary-medium/80 bg-primary/95 shadow-md backdrop-blur-xl">
-      <div className="container">
-        <div className="flex h-16 items-center justify-between gap-3">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050b12]/88 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-2xl">
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(212,175,55,0.08),transparent_28%,transparent_72%,rgba(212,175,55,0.08))]" />
+
+      <div className="container relative">
+        <div className="flex h-20 items-center justify-between gap-4">
           <Link
             to="/"
-            className="group z-50 flex flex-shrink-0 items-center gap-2"
+            className="group z-50 flex flex-shrink-0 items-center gap-3"
             aria-label="Ir para a página inicial"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent shadow-sm transition-transform duration-300 group-hover:scale-105">
-              <BookOpen className="h-4 w-4 text-accent-foreground" />
+            <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#f6d66b] shadow-lg shadow-[#d4af37]/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
+              <BookOpen className="h-6 w-6" />
+              <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f6d66b] shadow-[0_0_18px_rgba(246,214,107,0.8)]" />
             </div>
 
             <div className="flex flex-col leading-tight">
-              <span className="whitespace-nowrap font-['Poppins'] text-sm font-bold tracking-tight text-primary-foreground md:text-base">
-                Escola Bíblica 360
+              <span className="whitespace-nowrap font-['Poppins'] text-base font-extrabold tracking-tight text-white md:text-lg">
+                Escola Bíblica <span className="text-[#f6d66b]">360</span>
               </span>
-              <span className="whitespace-nowrap text-[8px] text-primary-foreground/65 md:text-[9px]">
+              <span className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.18em] text-white/52 md:text-[10px]">
                 Conhecimento em todas as dimensões
               </span>
             </div>
           </Link>
 
-          <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex xl:gap-2">
+          <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex xl:gap-3">
             <Link to="/" className={navLinkClass(currentPath === '/')}>
               Home
+              <span
+                className={`absolute -bottom-1 left-2 right-2 h-px rounded-full bg-[#d4af37] transition-all duration-300 ${
+                  currentPath === '/' ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'
+                }`}
+              />
             </Link>
 
             {menuGroups.map((group) => (
               <DropdownMenu key={group.title}>
                 <DropdownMenuTrigger className={navLinkClass(isGroupActive(group))}>
                   {group.title}
-                  <ChevronDown className="h-3.5 w-3.5" />
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  <span
+                    className={`absolute -bottom-1 left-2 right-2 h-px rounded-full bg-[#d4af37] transition-all duration-300 ${
+                      isGroupActive(group) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'
+                    }`}
+                  />
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent
                   align="center"
-                  className="w-[360px] overflow-hidden rounded-2xl border-border bg-card p-0 text-card-foreground shadow-2xl"
+                  className="w-[390px] overflow-hidden rounded-3xl border border-[#d4af37]/20 bg-[#07131f]/96 p-0 text-white shadow-2xl shadow-black/40 backdrop-blur-2xl"
                 >
-                  <div className="bg-gradient-to-br from-primary to-secondary p-5 text-primary-foreground">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                  <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_35%),linear-gradient(135deg,#08131f,#102f45)] p-6">
+                    <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/30 bg-white/5 text-[#f6d66b]">
+                      <BookOpen className="h-7 w-7" />
+                    </div>
+
+                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-[#f6d66b]">
                       {group.title}
                     </p>
 
-                    <p className="text-sm leading-6 text-primary-foreground/80">
+                    <p className="max-w-[270px] text-sm leading-6 text-white/75">
                       {group.description}
                     </p>
                   </div>
@@ -196,7 +212,7 @@ function Header() {
                   <div className="p-3">
                     <Link
                       to={group.path}
-                      className="mb-2 flex items-center justify-between rounded-xl bg-muted px-4 py-3 text-sm font-semibold text-primary transition-colors hover:bg-accent/10 hover:text-accent"
+                      className="mb-2 flex items-center justify-between rounded-2xl border border-[#d4af37]/20 bg-[#d4af37]/10 px-4 py-3 text-sm font-bold text-[#f6d66b] transition-colors hover:bg-[#d4af37]/16"
                     >
                       Ver tudo em {group.title}
                       <ArrowRight className="h-4 w-4" />
@@ -207,10 +223,10 @@ function Header() {
                         <Link
                           key={path}
                           to={path}
-                          className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-white/68 transition-all hover:bg-white/[0.07] hover:text-white"
                         >
                           <span>{label}</span>
-                          <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover:opacity-100" />
+                          <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover/item:translate-x-1 group-hover/item:opacity-100" />
                         </Link>
                       ))}
                     </div>
@@ -220,18 +236,28 @@ function Header() {
             ))}
           </nav>
 
-          <div className="hidden flex-shrink-0 xl:block">
+          <div className="hidden flex-shrink-0 items-center gap-3 xl:flex">
             <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-foreground/50" />
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
 
               <Input
                 type="search"
                 placeholder="Buscar..."
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="h-9 w-48 rounded-full border-transparent bg-primary-medium pl-9 text-sm text-primary-foreground placeholder:text-primary-foreground/50 transition-all focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-accent 2xl:w-56"
+                className="h-10 w-44 rounded-full border border-white/10 bg-white/[0.06] pl-10 text-sm text-white placeholder:text-white/42 transition-all focus-visible:border-[#d4af37]/40 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30 2xl:w-52"
               />
             </form>
+
+            <Button
+              asChild
+              className="h-11 rounded-xl bg-gradient-to-r from-[#f6d66b] to-[#c89525] px-5 text-sm font-extrabold text-[#07131f] shadow-lg shadow-[#d4af37]/15 hover:from-[#ffe184] hover:to-[#d4af37]"
+            >
+              <Link to="/estudos-biblicos">
+                Começar Estudos
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -239,7 +265,7 @@ function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-primary-foreground hover:bg-primary-medium hover:text-accent"
+                className="text-white hover:bg-white/10 hover:text-[#f6d66b] lg:hidden"
                 aria-label="Abrir menu"
               >
                 <Menu className="h-6 w-6" />
@@ -248,45 +274,81 @@ function Header() {
 
             <SheetContent
               side="right"
-              className="w-[320px] overflow-y-auto border-l-primary-medium bg-primary text-primary-foreground sm:w-[420px]"
+              className="w-[320px] overflow-y-auto border-l border-[#d4af37]/20 bg-[#050b12] text-white sm:w-[420px]"
             >
               <SheetHeader>
-                <SheetTitle className="text-left font-['Poppins'] text-primary-foreground">
+                <SheetTitle className="text-left font-['Poppins'] text-white">
                   Menu
                 </SheetTitle>
               </SheetHeader>
 
               <div className="mt-6 flex flex-col gap-6">
+                <Link
+                  to="/"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-3 rounded-2xl border border-[#d4af37]/20 bg-white/[0.04] p-4"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
+                    <BookOpen className="h-6 w-6" />
+                  </div>
+
+                  <div>
+                    <p className="font-extrabold text-white">
+                      Escola Bíblica <span className="text-[#f6d66b]">360</span>
+                    </p>
+                    <p className="text-xs text-white/55">
+                      Conhecimento em todas as dimensões
+                    </p>
+                  </div>
+                </Link>
+
                 <form onSubmit={handleSearch} className="relative">
-                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-foreground/50" />
+                  <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
 
                   <Input
                     type="search"
                     placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    className="h-10 w-full rounded-full border-transparent bg-primary-medium pl-9 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-2 focus-visible:ring-accent"
+                    className="h-11 w-full rounded-full border border-white/10 bg-white/[0.06] pl-10 text-white placeholder:text-white/42 focus-visible:ring-2 focus-visible:ring-[#d4af37]/30"
                   />
                 </form>
+
+                <Button
+                  asChild
+                  className="h-12 rounded-xl bg-gradient-to-r from-[#f6d66b] to-[#c89525] font-extrabold text-[#07131f] hover:from-[#ffe184] hover:to-[#d4af37]"
+                >
+                  <Link to="/estudos-biblicos" onClick={() => setIsOpen(false)}>
+                    Começar Estudos
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
 
                 <nav className="flex flex-col gap-5">
                   <Link
                     to="/"
                     onClick={() => setIsOpen(false)}
-                    className="rounded-xl px-3 py-2 text-lg font-semibold transition-colors hover:bg-primary-medium hover:text-accent"
+                    className="rounded-xl px-3 py-2 text-lg font-semibold transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
                   >
                     Home
                   </Link>
 
                   {menuGroups.map((group) => (
-                    <div key={group.title} className="rounded-2xl border border-primary-medium/80 bg-primary-medium/30 p-4">
+                    <div
+                      key={group.title}
+                      className="rounded-3xl border border-white/10 bg-white/[0.04] p-4"
+                    >
                       <Link
                         to={group.path}
                         onClick={() => setIsOpen(false)}
-                        className="mb-3 block text-sm font-semibold uppercase tracking-wider text-accent"
+                        className="mb-3 block text-sm font-bold uppercase tracking-wider text-[#f6d66b]"
                       >
                         {group.title}
                       </Link>
+
+                      <p className="mb-3 text-sm leading-6 text-white/58">
+                        {group.description}
+                      </p>
 
                       <div className="flex flex-col gap-1">
                         {group.items.map(([label, path]) => (
@@ -294,7 +356,7 @@ function Header() {
                             key={path}
                             to={path}
                             onClick={() => setIsOpen(false)}
-                            className="rounded-lg px-3 py-2 text-sm text-primary-foreground/85 transition-colors hover:bg-primary hover:text-accent"
+                            className="rounded-xl px-3 py-2 text-sm text-white/76 transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
                           >
                             {label}
                           </Link>
