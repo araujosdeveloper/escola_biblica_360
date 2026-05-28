@@ -14,14 +14,12 @@ import {
   Map,
   Mic,
   Search,
-  ShieldCheck,
   Sparkles,
   Users,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
-import CategoryCard from '@/components/CategoryCard.jsx';
 import ArticleCard from '@/components/ArticleCard.jsx';
 import NewsletterForm from '@/components/NewsletterForm.jsx';
 import { Button } from '@/components/ui/button';
@@ -69,25 +67,25 @@ const floatingCards = [
     icon: BookOpen,
     title: 'Estudos Bíblicos',
     description: 'Aprofunde seu conhecimento da Palavra.',
-    className: 'left-2 top-8',
+    className: 'left-4 top-8',
   },
   {
     icon: Users,
     title: 'Lições EBD',
     description: 'Conteúdo prático para classes e idades.',
-    className: 'right-2 top-14',
+    className: 'right-4 top-12',
   },
   {
     icon: Mic,
     title: 'Sermões',
     description: 'Mensagens que edificam e transformam.',
-    className: 'left-[-20px] bottom-32',
+    className: 'left-2 bottom-24',
   },
   {
     icon: Download,
     title: 'Downloads',
     description: 'Materiais para estudo e ensino.',
-    className: 'right-[-16px] bottom-24',
+    className: 'right-2 bottom-20',
   },
 ];
 
@@ -196,21 +194,21 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(212,175,55,0.22),transparent_28%),radial-gradient(circle_at_78%_28%,rgba(40,115,155,0.22),transparent_30%),linear-gradient(135deg,#04070c_0%,#07131f_34%,#0e2b41_68%,#04070c_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.07)_0%,transparent_22%,transparent_72%,rgba(212,175,55,0.12)_100%)]" />
-          <div className="absolute left-[-12%] top-[-18%] h-[560px] w-[560px] rounded-full bg-[#d4af37]/12 blur-3xl" />
-          <div className="absolute bottom-[-26%] right-[-10%] h-[680px] w-[680px] rounded-full bg-[#1b5b7d]/18 blur-3xl" />
+          <div className="absolute left-[-12%] top-[-18%] h-[520px] w-[520px] rounded-full bg-[#d4af37]/12 blur-3xl" />
+          <div className="absolute bottom-[-26%] right-[-10%] h-[620px] w-[620px] rounded-full bg-[#1b5b7d]/18 blur-3xl" />
           <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-background to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background to-transparent" />
         </div>
 
-        <div className="container relative z-10 min-h-[820px] py-24 lg:py-28">
-          <div className="grid min-h-[650px] grid-cols-1 items-center gap-14 lg:grid-cols-12">
+        <div className="container relative z-10 py-20 lg:py-24">
+          <div className="grid min-h-[560px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75 }}
               className="max-w-4xl lg:col-span-6"
             >
-              <div className="mb-8 flex items-center gap-4">
+              <div className="mb-7 flex items-center gap-4">
                 <span className="text-xs font-bold uppercase tracking-[0.32em] text-[#f6d66b]">
                   Aprenda. Ensine. Transforme.
                 </span>
@@ -224,7 +222,7 @@ export default function HomePage() {
                 </span>
               </h1>
 
-              <p className="mb-10 max-w-2xl text-lg leading-8 text-white/88 drop-shadow-md md:text-xl">
+              <p className="mb-9 max-w-2xl text-lg leading-8 text-white/88 drop-shadow-md md:text-xl">
                 Estudos, lições, sermões e materiais cristãos organizados para fortalecer sua fé
                 e apoiar o ensino da Palavra.
               </p>
@@ -252,7 +250,7 @@ export default function HomePage() {
                 </Button>
               </div>
 
-              <div className="mt-12 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
                 {stats.map((item) => (
                   <div
                     key={item.value}
@@ -271,28 +269,28 @@ export default function HomePage() {
               transition={{ duration: 0.75, delay: 0.15 }}
               className="hidden lg:col-span-6 lg:block"
             >
-              <div className="relative h-[590px]">
-                <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d4af37]/25" />
-                <div className="absolute left-1/2 top-1/2 h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
-                <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
+              <div className="relative h-[500px]">
+                <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d4af37]/25" />
+                <div className="absolute left-1/2 top-1/2 h-[255px] w-[255px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+                <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
 
-                <div className="absolute left-1/2 top-[47%] flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/35 bg-black/25 text-[#f6d66b] shadow-2xl shadow-[#d4af37]/20 backdrop-blur-xl">
+                <div className="absolute left-1/2 top-[43%] flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/35 bg-black/25 text-[#f6d66b] shadow-2xl shadow-[#d4af37]/20 backdrop-blur-xl">
                   <div className="text-center">
-                    <p className="text-5xl font-extrabold">360°</p>
-                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.22em] text-white/70">
+                    <p className="text-4xl font-extrabold">360°</p>
+                    <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/70">
                       Palavra
                     </p>
                   </div>
                 </div>
 
-                <div className="absolute bottom-[78px] left-1/2 w-[520px] -translate-x-1/2">
-                  <div className="relative mx-auto flex h-44 w-[460px] items-end justify-center rounded-[50%] border border-[#d4af37]/25 bg-black/20 shadow-2xl shadow-[#d4af37]/10">
-                    <div className="absolute bottom-16 h-28 w-56 rounded-t-full bg-gradient-to-t from-[#d4af37]/25 via-[#f6d66b]/18 to-transparent blur-2xl" />
+                <div className="absolute bottom-[58px] left-1/2 w-[450px] -translate-x-1/2">
+                  <div className="relative mx-auto flex h-36 w-[390px] items-end justify-center rounded-[50%] border border-[#d4af37]/25 bg-black/20 shadow-2xl shadow-[#d4af37]/10">
+                    <div className="absolute bottom-12 h-24 w-52 rounded-t-full bg-gradient-to-t from-[#d4af37]/25 via-[#f6d66b]/18 to-transparent blur-2xl" />
 
-                    <div className="relative mb-14 flex items-end gap-2">
-                      <div className="h-28 w-32 origin-bottom-right -skew-y-6 rounded-l-2xl border border-[#d4af37]/50 bg-gradient-to-br from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
-                      <div className="h-28 w-32 origin-bottom-left skew-y-6 rounded-r-2xl border border-[#d4af37]/50 bg-gradient-to-bl from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
-                      <div className="absolute left-1/2 top-0 h-32 w-px -translate-x-1/2 bg-[#8b6218]" />
+                    <div className="relative mb-11 flex items-end gap-2">
+                      <div className="h-24 w-28 origin-bottom-right -skew-y-6 rounded-l-2xl border border-[#d4af37]/50 bg-gradient-to-br from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
+                      <div className="h-24 w-28 origin-bottom-left skew-y-6 rounded-r-2xl border border-[#d4af37]/50 bg-gradient-to-bl from-[#f7e7a3] via-[#e7cf76] to-[#9a6d18] shadow-xl" />
+                      <div className="absolute left-1/2 top-0 h-28 w-px -translate-x-1/2 bg-[#8b6218]" />
                     </div>
                   </div>
                 </div>
@@ -303,13 +301,13 @@ export default function HomePage() {
                   return (
                     <div
                       key={card.title}
-                      className={`absolute ${card.className} w-56 rounded-2xl border border-[#d4af37]/30 bg-white/[0.07] p-5 shadow-2xl shadow-black/25 backdrop-blur-xl`}
+                      className={`absolute ${card.className} w-52 rounded-2xl border border-[#d4af37]/30 bg-white/[0.07] p-4 shadow-2xl shadow-black/25 backdrop-blur-xl`}
                     >
-                      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
-                        <Icon className="h-6 w-6" />
+                      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#d4af37]/12 text-[#f6d66b]">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="mb-1 font-extrabold text-white">{card.title}</h3>
-                      <p className="text-sm leading-6 text-white/72">{card.description}</p>
+                      <h3 className="mb-1 text-sm font-extrabold text-white">{card.title}</h3>
+                      <p className="text-xs leading-5 text-white/72">{card.description}</p>
                     </div>
                   );
                 })}
@@ -317,7 +315,7 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="relative z-20 -mb-40 mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="relative z-20 -mb-28 mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
             {highlightCards.map((card, index) => {
               const Icon = card.icon;
 
@@ -330,7 +328,7 @@ export default function HomePage() {
                 >
                   <Link
                     to={card.path}
-                    className="group block h-full rounded-3xl border border-[#d4af37]/35 bg-[#08131f]/85 p-7 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#f6d66b]/60 hover:bg-[#0d2032]"
+                    className="group block h-full rounded-3xl border border-[#d4af37]/35 bg-[#08131f]/90 p-7 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#f6d66b]/60 hover:bg-[#0d2032]"
                   >
                     <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#d4af37]/45 bg-[#d4af37]/10 text-[#f6d66b] transition-all duration-300 group-hover:bg-[#d4af37] group-hover:text-[#07131f]">
                       <Icon className="h-8 w-8" />
@@ -356,7 +354,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#050b12] pb-24 pt-56 text-white">
+      <section className="bg-[#050b12] pb-24 pt-44 text-white">
         <div className="container">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-4">
