@@ -24,7 +24,22 @@ import {
 
 const menuGroups = [
   {
-    title: 'Estudos Bíblicos',
+    title: 'CLASSES',
+    path: '/licoes-ebd',
+    description: 'Materiais organizados por classes para Escola Bíblica Dominical.',
+    items: [
+      ['Adultos', '/categoria/adultos'],
+      ['Jovens', '/categoria/jovens'],
+      ['Juvenis', '/categoria/juvenis'],
+      ['Juniores', '/categoria/juniores'],
+      ['Adolescentes', '/categoria/adolescentes'],
+      ['Pré-Adolescente', '/categoria/pre-adolescente'],
+      ['Primário', '/categoria/primario'],
+      ['Discipulando', '/categoria/discipulando'],
+    ],
+  },
+  {
+    title: 'ESTUDOS BÍBLICOS',
     path: '/estudos-biblicos',
     description: 'Estudos organizados para aprofundar o conhecimento das Escrituras.',
     items: [
@@ -36,19 +51,7 @@ const menuGroups = [
     ],
   },
   {
-    title: 'EBD',
-    path: '/licoes-ebd',
-    description: 'Materiais de apoio para Escola Bíblica Dominical.',
-    items: [
-      ['Adultos', '/categoria/adultos'],
-      ['Jovens', '/categoria/jovens'],
-      ['Juvenis', '/categoria/juvenis'],
-      ['Crianças', '/categoria/criancas'],
-      ['Lições Comentadas', '/categoria/licoes-comentadas'],
-    ],
-  },
-  {
-    title: 'Teologia',
+    title: 'TEOLOGIA',
     path: '/categoria/teologia',
     description: 'Temas doutrinários e estudos teológicos para formação cristã.',
     items: [
@@ -60,7 +63,7 @@ const menuGroups = [
     ],
   },
   {
-    title: 'Sermões',
+    title: 'SERMÕES',
     path: '/sermoes',
     description: 'Esboços e conteúdos para pregação, ensino e edificação.',
     items: [
@@ -72,19 +75,7 @@ const menuGroups = [
     ],
   },
   {
-    title: 'Recursos',
-    path: '/downloads',
-    description: 'Materiais práticos para estudo, ensino e preparação de aulas.',
-    items: [
-      ['Mapas Mentais', '/categoria/mapas-mentais'],
-      ['PDFs', '/categoria/pdfs'],
-      ['Slides', '/categoria/slides'],
-      ['Downloads', '/downloads'],
-      ['Estudos em PDF', '/categoria/estudos-em-pdf'],
-    ],
-  },
-  {
-    title: 'Institucional',
+    title: 'INSTITUCIONAL',
     path: '/sobre',
     description: 'Conheça o projeto, professores e canais de contato.',
     items: [
@@ -131,9 +122,11 @@ function Header() {
   const navLinkClass = (active = false) => `
     group relative inline-flex items-center gap-1.5 px-2.5 py-2 text-xs xl:text-sm font-bold
     transition-all duration-200 whitespace-nowrap outline-none
-    ${active
-      ? 'text-[#f6d66b]'
-      : 'text-white hover:text-[#f6d66b]'}
+    ${
+      active
+        ? 'text-[#f6d66b]'
+        : 'text-white hover:text-[#f6d66b]'
+    }
   `;
 
   return (
@@ -165,7 +158,7 @@ function Header() {
 
           <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex xl:gap-3">
             <Link to="/" className={navLinkClass(currentPath === '/')}>
-              Home
+              HOME
               <span
                 className={`absolute -bottom-1 left-2 right-2 h-px rounded-full bg-[#d4af37] transition-all duration-300 ${
                   currentPath === '/' ? 'opacity-100' : 'opacity-0 group-hover:opacity-80'
@@ -325,7 +318,7 @@ function Header() {
                     onClick={() => setIsOpen(false)}
                     className="rounded-xl px-3 py-2 text-lg font-semibold transition-colors hover:bg-white/[0.07] hover:text-[#f6d66b]"
                   >
-                    Home
+                    HOME
                   </Link>
 
                   {menuGroups.map((group) => (
