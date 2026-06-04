@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Bell, User, LogOut, Settings, ShieldCheck } from 'lucide-react';
@@ -15,8 +14,7 @@ import {
 const titleMap = {
   dashboard: 'Dashboard',
   posts: 'Posts',
-  categories: 'Categorias',
-  downloads: 'Downloads',
+  categories: 'Classes',
   messages: 'Mensagens',
   newsletter: 'Newsletter',
   settings: 'Configurações',
