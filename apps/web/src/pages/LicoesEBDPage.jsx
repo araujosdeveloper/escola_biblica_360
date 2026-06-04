@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import SEO from '@/components/SEO.jsx';
 import Header from '@/components/Header.jsx';
@@ -15,7 +14,7 @@ import pb from '@/lib/pocketbaseProductionClient.js';
 export default function LicoesEBDPage() {
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState(null);
-  const [catName, setCatName] = useState('Lições EBD');
+  const [catName, setCatName] = useState('CLASSES');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -38,7 +37,7 @@ export default function LicoesEBDPage() {
       }
 
       setCategory(categoryRecord);
-      setCatName(categoryRecord.name || 'Lições EBD');
+      setCatName('CLASSES');
 
       const response = await pb.collection('posts').getList(1, 12, {
         filter: `status="published" && category_id="${categoryRecord.id}"`,
@@ -61,33 +60,33 @@ export default function LicoesEBDPage() {
 
   const description =
     category?.description ||
-    'Materiais completos para Escola Bíblica Dominical: lições comentadas, introduções, aplicações práticas e apoio para professores e alunos.';
+    'Materiais organizados por classes para Escola Bíblica Dominical: adultos, jovens, juvenis, juniores, adolescentes, pré-adolescentes, primário e discipulado.';
 
   return (
     <>
       <SEO
-        title="Lições EBD - Escola Bíblica 360"
+        title="Classes - Escola Bíblica 360"
         description={description}
         breadcrumbs={[
           { label: 'Home', url: '/' },
-          { label: 'Lições EBD', url: '/licoes-ebd' },
+          { label: 'Classes', url: '/licoes-ebd' },
         ]}
       />
 
       <Header />
 
-      <TitleSection title="Lições EBD" description={description}>
+      <TitleSection title="CLASSES" description={description}>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <div className="rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-accent">
             Escola Bíblica
           </div>
 
           <div className="rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary-foreground/80">
-            Professores
+            Classes
           </div>
 
           <div className="rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary-foreground/80">
-            Aplicação Prática
+            Ensino Cristão
           </div>
         </div>
       </TitleSection>
@@ -104,10 +103,10 @@ export default function LicoesEBDPage() {
 
                   <div>
                     <h3 className="font-['Poppins'] text-base font-bold text-foreground">
-                      Lições comentadas
+                      Conteúdo por classe
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                      Conteúdos preparados para facilitar a compreensão da lição.
+                      Materiais organizados para diferentes faixas e etapas de ensino.
                     </p>
                   </div>
                 </div>
@@ -134,10 +133,10 @@ export default function LicoesEBDPage() {
 
                   <div>
                     <h3 className="font-['Poppins'] text-base font-bold text-foreground">
-                      Ensino para a igreja
+                      Formação para a igreja
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                      Materiais voltados à edificação de alunos, classes e ministérios.
+                      Conteúdos voltados à edificação de alunos, classes e ministérios.
                     </p>
                   </div>
                 </div>
@@ -171,8 +170,8 @@ export default function LicoesEBDPage() {
             </div>
           ) : error ? (
             <ErrorState
-              title="Erro ao carregar lições"
-              message="Não foi possível carregar as lições da Escola Bíblica Dominical no momento."
+              title="Erro ao carregar classes"
+              message="Não foi possível carregar os materiais das classes no momento."
               onRetry={fetchPosts}
             />
           ) : posts.length > 0 ? (
@@ -181,7 +180,7 @@ export default function LicoesEBDPage() {
                 <ArticleCard
                   key={post.id}
                   image={post.featured_image ? pb.files.getUrl(post, post.featured_image) : null}
-                  category={post.expand?.category_id?.name || catName}
+                  category="CLASSES"
                   title={post.title}
                   summary={post.excerpt}
                   date={new Date(post.published_at || post.created).toLocaleDateString('pt-BR')}
@@ -192,8 +191,8 @@ export default function LicoesEBDPage() {
             </div>
           ) : (
             <EmptyState
-              title="Nenhuma lição encontrada"
-              message="Ainda não temos lições publicadas nesta seção."
+              title="Nenhum material encontrado"
+              message="Ainda não temos materiais publicados nesta seção de classes."
             />
           )}
         </div>
