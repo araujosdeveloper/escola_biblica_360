@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -15,8 +14,8 @@ const footerGroups = [
   {
     title: 'Conteúdo',
     links: [
+      ['Classes', '/licoes-ebd'],
       ['Estudos Bíblicos', '/estudos-biblicos'],
-      ['Lições EBD', '/licoes-ebd'],
       ['Teologia Pentecostal', '/categoria/teologia-pentecostal'],
       ['Escatologia', '/escatologia'],
       ['Sermões', '/sermoes'],
@@ -24,20 +23,11 @@ const footerGroups = [
     ],
   },
   {
-    title: 'Recursos',
-    links: [
-      ['Downloads', '/downloads'],
-      ['Mapas Mentais', '/categoria/mapas-mentais'],
-      ['PDFs', '/categoria/pdfs'],
-      ['Slides', '/categoria/slides'],
-      ['Professores', '/professores'],
-    ],
-  },
-  {
     title: 'Institucional',
     links: [
       ['Sobre o projeto', '/sobre'],
       ['Contato', '/contato'],
+      ['Professores', '/professores'],
       ['Política de Privacidade', '/politica-de-privacidade'],
       ['Termos de Uso', '/termos-de-uso'],
       ['Painel Admin', '/admin/login'],
@@ -53,7 +43,7 @@ export default function Footer() {
 
       <div className="container relative z-10 pt-16 pb-8">
         <div className="mb-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <Link to="/" className="group mb-6 flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent shadow-sm transition-transform duration-300 group-hover:scale-105">
                 <BookOpen className="h-6 w-6 text-accent-foreground" />
@@ -69,8 +59,8 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="mb-6 max-w-sm text-sm leading-7 text-primary-foreground/75">
-              Uma plataforma cristã dedicada a estudos bíblicos, Escola Bíblica Dominical,
+            <p className="mb-6 max-w-md text-sm leading-7 text-primary-foreground/75">
+              Uma plataforma cristã dedicada a estudos bíblicos, classes da Escola Bíblica,
               teologia, sermões e materiais de apoio para professores, alunos e amantes da Palavra.
             </p>
 
@@ -112,8 +102,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          <div className="lg:col-span-4">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               {footerGroups.map((group) => (
                 <div key={group.title}>
                   <h3 className="mb-5 font-['Poppins'] text-sm font-bold uppercase tracking-[0.18em] text-accent">
@@ -171,7 +161,7 @@ export default function Footer() {
           </p>
 
           <p className="text-center text-xs text-primary-foreground/45 md:text-right">
-            Desenvolvido para ensino bíblico, formação cristã e apoio à Escola Bíblica Dominical.
+            Desenvolvido para ensino bíblico, formação cristã e apoio às classes da Escola Bíblica.
           </p>
         </div>
       </div>
