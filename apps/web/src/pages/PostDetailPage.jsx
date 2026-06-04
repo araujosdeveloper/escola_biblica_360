@@ -13,6 +13,9 @@ import {
   Eye,
   ArrowRight,
   BookOpen,
+  Download,
+  FileText,
+  Presentation,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import Header from '@/components/Header.jsx';
@@ -159,6 +162,8 @@ export default function PostDetailPage() {
   const categoryName = categoryRecord?.name || 'Artigo';
   const categorySlug = categoryRecord?.slug || '';
   const imageUrl = post?.featured_image ? pb.files.getUrl(post, post.featured_image) : null;
+  const pdfUrl = post?.pdf_file ? pb.files.getUrl(post, post.pdf_file) : null;
+  const slidesUrl = post?.slides_file ? pb.files.getUrl(post, post.slides_file) : null;
   const authorName = post ? getAuthorName(post) : 'Equipe Escola Bíblica 360';
   const postUrl = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -238,33 +243,34 @@ export default function PostDetailPage() {
 
       <Header />
 
-      <section className="relative overflow-hidden bg-primary">
+      <section className="relative overflow-hidden bg-[#050b12] text-white">
         <div className="absolute inset-0">
           {imageUrl && (
             <img
               src={imageUrl}
               alt={post.title}
-              className="h-full w-full object-cover opacity-20"
+              className="h-full w-full object-cover opacity-24"
             />
           )}
 
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/75" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.16),transparent_32%)]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050b12] via-[#07131f]/96 to-[#12324a]/88" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_32%)]" />
+          <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
         </div>
 
         <div className="container relative z-10 py-16 md:py-24">
           <div className="mx-auto max-w-5xl">
-            <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-primary-foreground/70">
-              <Link to="/" className="hover:text-accent transition-colors">
+            <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/74">
+              <Link to="/" className="transition-colors hover:text-[#f6d66b]">
                 Home
               </Link>
 
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4 text-white/35" />
 
               {categorySlug ? (
                 <Link
                   to={`/categoria/${categorySlug}`}
-                  className="hover:text-accent transition-colors"
+                  className="transition-colors hover:text-[#f6d66b]"
                 >
                   {categoryName}
                 </Link>
@@ -272,48 +278,48 @@ export default function PostDetailPage() {
                 <span>{categoryName}</span>
               )}
 
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4 text-white/35" />
 
-              <span className="max-w-[240px] truncate font-medium text-primary-foreground sm:max-w-md">
+              <span className="max-w-[240px] truncate font-bold text-white sm:max-w-md">
                 {post.title}
               </span>
             </nav>
 
-            <Badge className="mb-6 border-none bg-accent text-accent-foreground hover:bg-accent/90">
+            <Badge className="mb-6 border border-[#d4af37]/35 bg-[#d4af37] text-[#07131f] hover:bg-[#e4c45a]">
               {categoryName}
             </Badge>
 
-            <h1 className="mb-6 max-w-4xl font-['Poppins'] text-4xl font-extrabold leading-tight tracking-tight text-primary-foreground md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 max-w-4xl font-['Poppins'] text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
 
             {post.excerpt && (
-              <p className="mb-8 max-w-3xl text-lg leading-8 text-primary-foreground/78 md:text-xl">
+              <p className="mb-8 max-w-3xl text-lg font-medium leading-8 text-white/92 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-xl">
                 {post.excerpt}
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-primary-foreground/80">
-              <div className="flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 backdrop-blur-sm">
-                <User className="h-4 w-4 text-accent" />
+            <div className="flex flex-wrap items-center gap-4 text-sm text-white/86">
+              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <User className="h-4 w-4 text-[#f6d66b]" />
                 <span>{authorName}</span>
               </div>
 
-              <div className="flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 backdrop-blur-sm">
-                <Calendar className="h-4 w-4 text-accent" />
+              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <Calendar className="h-4 w-4 text-[#f6d66b]" />
                 <time dateTime={post.published_at || post.created}>{formattedDate}</time>
               </div>
 
               {post.reading_time && (
-                <div className="flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 backdrop-blur-sm">
-                  <Clock className="h-4 w-4 text-accent" />
+                <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                  <Clock className="h-4 w-4 text-[#f6d66b]" />
                   <span>{post.reading_time} min de leitura</span>
                 </div>
               )}
 
               {typeof post.views === 'number' && (
-                <div className="flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-4 py-2 backdrop-blur-sm">
-                  <Eye className="h-4 w-4 text-accent" />
+                <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                  <Eye className="h-4 w-4 text-[#f6d66b]" />
                   <span>{post.views} visualizações</span>
                 </div>
               )}
@@ -348,6 +354,8 @@ export default function PostDetailPage() {
                     prose-p:text-foreground
                     prose-p:leading-8
                     prose-p:mb-6
+                    prose-p:text-justify
+                    prose-p:[hyphens:auto]
                     prose-headings:font-['Poppins']
                     prose-headings:text-foreground
                     prose-headings:font-bold
@@ -374,6 +382,51 @@ export default function PostDetailPage() {
                   "
                   dangerouslySetInnerHTML={renderContent(post.content)}
                 />
+
+                {(pdfUrl || slidesUrl) && (
+                  <div className="mt-12 rounded-3xl border border-[#d4af37]/25 bg-[#f8f4e7] p-6">
+                    <div className="mb-5 flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#d4af37] text-[#07131f]">
+                        <Download className="h-5 w-5" />
+                      </div>
+
+                      <div>
+                        <h2 className="font-['Poppins'] text-xl font-extrabold text-[#0f2f45]">
+                          Materiais de apoio
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                          Baixe os arquivos complementares deste estudo.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      {pdfUrl && (
+                        <Button
+                          asChild
+                          className="h-12 rounded-xl bg-[#0f2f45] font-bold text-white hover:bg-[#143d59]"
+                        >
+                          <a href={pdfUrl} target="_blank" rel="noreferrer">
+                            <FileText className="mr-2 h-4 w-4" />
+                            Baixar PDF
+                          </a>
+                        </Button>
+                      )}
+
+                      {slidesUrl && (
+                        <Button
+                          asChild
+                          className="h-12 rounded-xl bg-[#d4af37] font-bold text-[#07131f] hover:bg-[#e4c45a]"
+                        >
+                          <a href={slidesUrl} target="_blank" rel="noreferrer">
+                            <Presentation className="mr-2 h-4 w-4" />
+                            Baixar Slides
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 <div className="mt-12 border-t border-border pt-8">
                   <div className="mb-5 flex items-center gap-3">

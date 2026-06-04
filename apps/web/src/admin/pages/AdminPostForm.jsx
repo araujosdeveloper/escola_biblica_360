@@ -25,9 +25,21 @@ import {
   Globe,
   FileText,
   Image as ImageIcon,
+  Download,
+  Presentation,
+  Info,
 } from 'lucide-react';
 
 import { toast } from 'sonner';
+
+const LIMITS = {
+  title: 150,
+  slug: 180,
+  excerpt: 500,
+  content: 200000,
+  seo_title: 80,
+  seo_description: 300,
+};
 
 const initialState = {
   title: '',
@@ -55,6 +67,12 @@ export default function AdminPostForm({ mode = 'create' }) {
   const [featuredImage, setFeaturedImage] = useState(null);
   const [currentImage, setCurrentImage] = useState('');
 
+  const [pdfFile, setPdfFile] = useState(null);
+  const [currentPdf, setCurrentPdf] = useState('');
+
+  const [slidesFile, setSlidesFile] = useState(null);
+  const [currentSlides, setCurrentSlides] = useState('');
+
   const generateSlug = (text) => {
     return String(text || '')
       .normalize('NFD')
@@ -63,6 +81,26 @@ export default function AdminPostForm({ mode = 'create' }) {
       .trim()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-');
+  };
+
+  const stripHtml = (value = '') => {
+    return String(value)
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
+  const countPlainText = (value = '') => {
+    return stripHtml(value).length;
+  };
+
+  const getCounterClass = (count, limit) => {
+    if (count > limit) return 'text-admin-danger';
+    if (count > limit * 0.85) return 'text-amber-600';
+    return 'text-gray-500';
   };
 
   useEffect(() => {
@@ -95,9 +133,15 @@ export default function AdminPostForm({ mode = 'create' }) {
           });
 
           if (post.featured_image) {
-            setCurrentImage(
-              pb.files.getUrl(post, post.featured_image)
-            );
+            setCurrentImage(pb.files.getUrl(post, post.featured_image));
+          }
+
+          if (post.pdf_file) {
+            setCurrentPdf(pb.files.getUrl(post, post.pdf_file));
+          }
+
+          if (post.slides_file) {
+            setCurrentSlides(pb.files.getUrl(post, post.slides_file));
           }
         }
       } catch (error) {
@@ -109,6 +153,26 @@ export default function AdminPostForm({ mode = 'create' }) {
 
     loadData();
   }, [id, isEditMode]);
+
+  const titleCount = useMemo(
+    () => formData.title.length,
+    [formData.title]
+  );
+
+  const slugCount = useMemo(
+    () => formData.slug.length,
+    [formData.slug]
+  );
+
+  const excerptCount = useMemo(
+    () => formData.excerpt.length,
+    [formData.excerpt]
+  );
+
+  const contentCount = useMemo(
+    () => countPlainText(formData.content),
+    [formData.content]
+  );
 
   const seoTitleCount = useMemo(
     () => formData.seo_title.length,
@@ -133,6 +197,36 @@ export default function AdminPostForm({ mode = 'create' }) {
       return;
     }
 
+    if (titleCount > LIMITS.title) {
+      toast.error(`O título passou de ${LIMITS.title} caracteres.`);
+      return;
+    }
+
+    if (slugCount > LIMITS.slug) {
+      toast.error(`O slug passou de ${LIMITS.slug} caracteres.`);
+      return;
+    }
+
+    if (excerptCount > LIMITS.excerpt) {
+      toast.error(`O resumo passou de ${LIMITS.excerpt} caracteres.`);
+      return;
+    }
+
+    if (contentCount > LIMITS.content) {
+      toast.error(`O conteúdo passou de ${LIMITS.content} caracteres.`);
+      return;
+    }
+
+    if (seoTitleCount > LIMITS.seo_title) {
+      toast.error(`O SEO Title passou de ${LIMITS.seo_title} caracteres.`);
+      return;
+    }
+
+    if (seoDescriptionCount > LIMITS.seo_description) {
+      toast.error(`A SEO Description passou de ${LIMITS.seo_description} caracteres.`);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -144,6 +238,14 @@ export default function AdminPostForm({ mode = 'create' }) {
 
       if (featuredImage) {
         data.append('featured_image', featuredImage);
+      }
+
+      if (pdfFile) {
+        data.append('pdf_file', pdfFile);
+      }
+
+      if (slidesFile) {
+        data.append('slides_file', slidesFile);
       }
 
       if (isEditMode && id) {
@@ -163,7 +265,7 @@ export default function AdminPostForm({ mode = 'create' }) {
       navigate('/admin/posts');
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao salvar post');
+      toast.error('Erro ao salvar post. Verifique os campos e os limites da collection.');
     } finally {
       setLoading(false);
     }
@@ -195,7 +297,7 @@ export default function AdminPostForm({ mode = 'create' }) {
             </h1>
 
             <p className="mt-1 text-sm text-gray-500">
-              Gerencie conteúdo, SEO e publicação.
+              Gerencie conteúdo, SEO, publicação e materiais de apoio.
             </p>
           </div>
         </div>
@@ -230,6 +332,24 @@ export default function AdminPostForm({ mode = 'create' }) {
         </div>
       </div>
 
+      <div className="rounded-2xl border border-admin-gold/25 bg-admin-gold/10 p-4">
+        <div className="flex gap-3">
+          <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-admin-gold" />
+
+          <div>
+            <p className="font-semibold text-admin-dark">
+              Limites recomendados para publicação
+            </p>
+
+            <p className="mt-1 text-sm leading-6 text-gray-600">
+              Título até {LIMITS.title} caracteres, resumo até {LIMITS.excerpt},
+              SEO Title até {LIMITS.seo_title}, SEO Description até {LIMITS.seo_description}
+              e conteúdo até {LIMITS.content.toLocaleString('pt-BR')} caracteres.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         <div className="space-y-6 xl:col-span-2">
           <div className="rounded-2xl border border-admin-border bg-white p-6 shadow-sm">
@@ -251,7 +371,13 @@ export default function AdminPostForm({ mode = 'create' }) {
 
             <div className="space-y-6">
               <div className="space-y-2">
-                <Label>Título</Label>
+                <div className="flex items-center justify-between">
+                  <Label>Título</Label>
+
+                  <span className={`text-xs ${getCounterClass(titleCount, LIMITS.title)}`}>
+                    {titleCount}/{LIMITS.title}
+                  </span>
+                </div>
 
                 <Input
                   value={formData.title}
@@ -270,7 +396,13 @@ export default function AdminPostForm({ mode = 'create' }) {
               </div>
 
               <div className="space-y-2">
-                <Label>Slug</Label>
+                <div className="flex items-center justify-between">
+                  <Label>Slug</Label>
+
+                  <span className={`text-xs ${getCounterClass(slugCount, LIMITS.slug)}`}>
+                    {slugCount}/{LIMITS.slug}
+                  </span>
+                </div>
 
                 <Input
                   value={formData.slug}
@@ -285,7 +417,13 @@ export default function AdminPostForm({ mode = 'create' }) {
               </div>
 
               <div className="space-y-2">
-                <Label>Resumo</Label>
+                <div className="flex items-center justify-between">
+                  <Label>Resumo</Label>
+
+                  <span className={`text-xs ${getCounterClass(excerptCount, LIMITS.excerpt)}`}>
+                    {excerptCount}/{LIMITS.excerpt}
+                  </span>
+                </div>
 
                 <textarea
                   rows={4}
@@ -302,7 +440,13 @@ export default function AdminPostForm({ mode = 'create' }) {
               </div>
 
               <div className="space-y-2">
-                <Label>Conteúdo</Label>
+                <div className="flex items-center justify-between">
+                  <Label>Conteúdo</Label>
+
+                  <span className={`text-xs ${getCounterClass(contentCount, LIMITS.content)}`}>
+                    {contentCount.toLocaleString('pt-BR')}/{LIMITS.content.toLocaleString('pt-BR')}
+                  </span>
+                </div>
 
                 <RichTextEditor
                   value={formData.content}
@@ -313,6 +457,11 @@ export default function AdminPostForm({ mode = 'create' }) {
                     })
                   }
                 />
+
+                <p className="text-xs leading-5 text-gray-500">
+                  O conteúdo será exibido justificado no site para melhorar a leitura.
+                  Para adicionar botões de alinhamento dentro do editor, vamos ajustar o componente RichTextEditor.
+                </p>
               </div>
             </div>
           </div>
@@ -339,14 +488,8 @@ export default function AdminPostForm({ mode = 'create' }) {
                 <div className="flex items-center justify-between">
                   <Label>SEO Title</Label>
 
-                  <span
-                    className={`text-xs ${
-                      seoTitleCount > 60
-                        ? 'text-admin-danger'
-                        : 'text-gray-500'
-                    }`}
-                  >
-                    {seoTitleCount}/60
+                  <span className={`text-xs ${getCounterClass(seoTitleCount, LIMITS.seo_title)}`}>
+                    {seoTitleCount}/{LIMITS.seo_title}
                   </span>
                 </div>
 
@@ -366,14 +509,8 @@ export default function AdminPostForm({ mode = 'create' }) {
                 <div className="flex items-center justify-between">
                   <Label>SEO Description</Label>
 
-                  <span
-                    className={`text-xs ${
-                      seoDescriptionCount > 160
-                        ? 'text-admin-danger'
-                        : 'text-gray-500'
-                    }`}
-                  >
-                    {seoDescriptionCount}/160
+                  <span className={`text-xs ${getCounterClass(seoDescriptionCount, LIMITS.seo_description)}`}>
+                    {seoDescriptionCount}/{LIMITS.seo_description}
                   </span>
                 </div>
 
@@ -499,6 +636,54 @@ export default function AdminPostForm({ mode = 'create' }) {
               onFileSelect={setFeaturedImage}
               accept="image/*"
               currentFileUrl={currentImage}
+            />
+          </div>
+
+          <div className="rounded-2xl border border-admin-border bg-white p-6 shadow-sm">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-admin-gold/10 text-admin-gold">
+                <Download className="h-5 w-5" />
+              </div>
+
+              <div>
+                <h3 className="font-['Poppins'] text-lg font-bold text-admin-dark">
+                  Material em PDF
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  Arquivo PDF para download no final do artigo.
+                </p>
+              </div>
+            </div>
+
+            <FileUpload
+              onFileSelect={setPdfFile}
+              accept="application/pdf,.pdf"
+              currentFileUrl={currentPdf}
+            />
+          </div>
+
+          <div className="rounded-2xl border border-admin-border bg-white p-6 shadow-sm">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-admin-gold/10 text-admin-gold">
+                <Presentation className="h-5 w-5" />
+              </div>
+
+              <div>
+                <h3 className="font-['Poppins'] text-lg font-bold text-admin-dark">
+                  Slides
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  PDF, PPT ou PPTX para apoio à aula.
+                </p>
+              </div>
+            </div>
+
+            <FileUpload
+              onFileSelect={setSlidesFile}
+              accept="application/pdf,.pdf,.ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+              currentFileUrl={currentSlides}
             />
           </div>
         </aside>
