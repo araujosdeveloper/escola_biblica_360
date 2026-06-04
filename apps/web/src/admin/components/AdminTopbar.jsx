@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Bell, User, LogOut, Settings, ShieldCheck } from 'lucide-react';
+import { Menu, Bell, LogOut, Settings, ShieldCheck } from 'lucide-react';
 import { useAdminAuth } from '../context/AdminAuthContext.jsx';
 import {
   DropdownMenu,
@@ -14,7 +14,7 @@ import {
 const titleMap = {
   dashboard: 'Dashboard',
   posts: 'Posts',
-  categories: 'Classes',
+  categories: 'Categorias',
   messages: 'Mensagens',
   newsletter: 'Newsletter',
   settings: 'Configurações',
@@ -24,9 +24,14 @@ export default function AdminTopbar({ toggleSidebar }) {
   const { currentAdmin, currentUser, logout, role } = useAdminAuth();
   const location = useLocation();
 
-  const pathnames = location.pathname.split('/').filter((item) => item && item !== 'admin');
+  const pathnames = location.pathname
+    .split('/')
+    .filter((item) => item && item !== 'admin');
+
   const sectionKey = pathnames[0] || 'dashboard';
-  const title = titleMap[sectionKey] || sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
+  const title =
+    titleMap[sectionKey] ||
+    sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
 
   const admin = currentAdmin || currentUser;
 

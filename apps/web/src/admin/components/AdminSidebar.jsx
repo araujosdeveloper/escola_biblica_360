@@ -40,7 +40,7 @@ export default function AdminSidebar({ isOpen, setIsOpen }) {
           icon: FileText,
         },
         {
-          name: 'Classes',
+          name: 'Categorias',
           path: '/admin/categories',
           icon: Tags,
         },
@@ -122,6 +122,7 @@ export default function AdminSidebar({ isOpen, setIsOpen }) {
           <button
             onClick={() => setIsOpen(false)}
             className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-white lg:hidden"
+            aria-label="Fechar menu"
           >
             <X className="h-5 w-5" />
           </button>
