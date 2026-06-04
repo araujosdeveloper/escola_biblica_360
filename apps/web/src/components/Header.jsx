@@ -27,6 +27,7 @@ const menuGroups = [
     title: 'CLASSES',
     path: '/licoes-ebd',
     description: 'Materiais organizados por classes para Escola Bíblica Dominical.',
+    columns: 2,
     items: [
       ['Adultos', '/categoria/adultos'],
       ['Jovens', '/categoria/jovens'],
@@ -42,6 +43,7 @@ const menuGroups = [
     title: 'ESTUDOS BÍBLICOS',
     path: '/estudos-biblicos',
     description: 'Estudos organizados para aprofundar o conhecimento das Escrituras.',
+    columns: 1,
     items: [
       ['Antigo Testamento', '/categoria/antigo-testamento'],
       ['Novo Testamento', '/categoria/novo-testamento'],
@@ -54,6 +56,7 @@ const menuGroups = [
     title: 'TEOLOGIA',
     path: '/categoria/teologia',
     description: 'Temas doutrinários e estudos teológicos para formação cristã.',
+    columns: 1,
     items: [
       ['Teologia Pentecostal', '/categoria/teologia-pentecostal'],
       ['Escatologia', '/escatologia'],
@@ -66,6 +69,7 @@ const menuGroups = [
     title: 'SERMÕES',
     path: '/sermoes',
     description: 'Esboços e conteúdos para pregação, ensino e edificação.',
+    columns: 1,
     items: [
       ['Sermões Expositivos', '/categoria/sermoes-expositivos'],
       ['Sermões Temáticos', '/categoria/sermoes-tematicos'],
@@ -78,6 +82,7 @@ const menuGroups = [
     title: 'INSTITUCIONAL',
     path: '/sobre',
     description: 'Conheça o projeto, professores e canais de contato.',
+    columns: 1,
     items: [
       ['Sobre', '/sobre'],
       ['Contato', '/contato'],
@@ -166,62 +171,75 @@ function Header() {
               />
             </Link>
 
-            {menuGroups.map((group) => (
-              <DropdownMenu key={group.title}>
-                <DropdownMenuTrigger className={navLinkClass(isGroupActive(group))}>
-                  {group.title}
-                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                  <span
-                    className={`absolute -bottom-1 left-2 right-2 h-px rounded-full bg-[#d4af37] transition-all duration-300 ${
-                      isGroupActive(group) ? 'opacity-100' : 'opacity-0 group-hover:opacity-80'
-                    }`}
-                  />
-                </DropdownMenuTrigger>
+            {menuGroups.map((group) => {
+              const isClassesMenu = group.title === 'CLASSES';
 
-                <DropdownMenuContent
-                  align="center"
-                  sideOffset={14}
-                  className="z-[1000] w-[390px] overflow-hidden rounded-3xl border border-[#d4af37]/30 bg-[#07131f] p-0 text-white shadow-2xl shadow-black/60"
-                >
-                  <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_35%),linear-gradient(135deg,#07131f,#12324a)] p-6">
-                    <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#f6d66b]">
-                      <BookOpen className="h-7 w-7" />
+              return (
+                <DropdownMenu key={group.title}>
+                  <DropdownMenuTrigger className={navLinkClass(isGroupActive(group))}>
+                    {group.title}
+                    <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                    <span
+                      className={`absolute -bottom-1 left-2 right-2 h-px rounded-full bg-[#d4af37] transition-all duration-300 ${
+                        isGroupActive(group) ? 'opacity-100' : 'opacity-0 group-hover:opacity-80'
+                      }`}
+                    />
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent
+                    align="center"
+                    sideOffset={14}
+                    className={`
+                      z-[1000] overflow-hidden rounded-3xl border border-[#d4af37]/30
+                      bg-[#07131f] p-0 text-white shadow-2xl shadow-black/60
+                      ${isClassesMenu ? 'w-[560px]' : 'w-[390px]'}
+                    `}
+                  >
+                    <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_35%),linear-gradient(135deg,#07131f,#12324a)] p-6">
+                      <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#f6d66b]">
+                        <BookOpen className="h-7 w-7" />
+                      </div>
+
+                      <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.24em] text-[#f6d66b]">
+                        {group.title}
+                      </p>
+
+                      <p className="max-w-[360px] text-sm font-medium leading-6 text-white">
+                        {group.description}
+                      </p>
                     </div>
 
-                    <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.24em] text-[#f6d66b]">
-                      {group.title}
-                    </p>
+                    <div className="bg-[#07131f] p-3">
+                      <Link
+                        to={group.path}
+                        className="mb-2 flex items-center justify-between rounded-2xl border border-[#d4af37]/30 bg-[#d4af37]/12 px-4 py-3 text-sm font-extrabold text-[#f6d66b] transition-colors hover:bg-[#d4af37]/18"
+                      >
+                        Ver tudo em {group.title}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
 
-                    <p className="max-w-[270px] text-sm font-medium leading-6 text-white">
-                      {group.description}
-                    </p>
-                  </div>
-
-                  <div className="bg-[#07131f] p-3">
-                    <Link
-                      to={group.path}
-                      className="mb-2 flex items-center justify-between rounded-2xl border border-[#d4af37]/30 bg-[#d4af37]/12 px-4 py-3 text-sm font-extrabold text-[#f6d66b] transition-colors hover:bg-[#d4af37]/18"
-                    >
-                      Ver tudo em {group.title}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-
-                    <div className="grid grid-cols-1 gap-1">
-                      {group.items.map(([label, path]) => (
-                        <Link
-                          key={path}
-                          to={path}
-                          className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-semibold text-white/88 transition-all hover:bg-white/[0.08] hover:text-[#f6d66b]"
-                        >
-                          <span>{label}</span>
-                          <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover/item:translate-x-1 group-hover/item:opacity-100" />
-                        </Link>
-                      ))}
+                      <div
+                        className={`
+                          gap-1
+                          ${isClassesMenu ? 'grid grid-cols-2' : 'grid grid-cols-1'}
+                        `}
+                      >
+                        {group.items.map(([label, path]) => (
+                          <Link
+                            key={path}
+                            to={path}
+                            className="group/item flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-semibold text-white/88 transition-all hover:bg-white/[0.08] hover:text-[#f6d66b]"
+                          >
+                            <span>{label}</span>
+                            <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover/item:translate-x-1 group-hover/item:opacity-100" />
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              );
+            })}
           </nav>
 
           <div className="hidden flex-shrink-0 items-center gap-3 xl:flex">
