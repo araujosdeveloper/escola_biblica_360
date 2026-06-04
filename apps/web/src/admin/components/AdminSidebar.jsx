@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   FileText,
   Tags,
-  Download,
   Mail,
   Users,
   Settings,
@@ -42,14 +40,9 @@ export default function AdminSidebar({ isOpen, setIsOpen }) {
           icon: FileText,
         },
         {
-          name: 'Categorias',
+          name: 'Classes',
           path: '/admin/categories',
           icon: Tags,
-        },
-        {
-          name: 'Downloads',
-          path: '/admin/downloads',
-          icon: Download,
         },
       ],
     },
