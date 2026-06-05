@@ -18,5 +18,8 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@tiptap/extension-text-align": "^2.27.2"
+  }
 }

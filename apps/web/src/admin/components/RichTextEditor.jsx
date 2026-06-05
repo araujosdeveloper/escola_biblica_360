@@ -1,9 +1,9 @@
-
 import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
 
 import {
   Bold,
@@ -21,6 +21,10 @@ import {
   Redo,
   Link as LinkIcon,
   Unlink,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
 } from 'lucide-react';
 
 const ToolbarButton = ({ active, onClick, children, title, disabled = false }) => {
@@ -135,6 +139,40 @@ const MenuBar = ({ editor }) => {
       <Divider />
 
       <ToolbarButton
+        title="Alinhar à esquerda"
+        active={editor.isActive({ textAlign: 'left' })}
+        onClick={() => editor.chain().focus().setTextAlign('left').run()}
+      >
+        <AlignLeft className="h-4 w-4" />
+      </ToolbarButton>
+
+      <ToolbarButton
+        title="Centralizar"
+        active={editor.isActive({ textAlign: 'center' })}
+        onClick={() => editor.chain().focus().setTextAlign('center').run()}
+      >
+        <AlignCenter className="h-4 w-4" />
+      </ToolbarButton>
+
+      <ToolbarButton
+        title="Alinhar à direita"
+        active={editor.isActive({ textAlign: 'right' })}
+        onClick={() => editor.chain().focus().setTextAlign('right').run()}
+      >
+        <AlignRight className="h-4 w-4" />
+      </ToolbarButton>
+
+      <ToolbarButton
+        title="Justificar"
+        active={editor.isActive({ textAlign: 'justify' })}
+        onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+      >
+        <AlignJustify className="h-4 w-4" />
+      </ToolbarButton>
+
+      <Divider />
+
+      <ToolbarButton
         title="Lista"
         active={editor.isActive('bulletList')}
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -223,6 +261,11 @@ export default function RichTextEditor({ value = '', onChange }) {
         heading: {
           levels: [1, 2, 3],
         },
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+        alignments: ['left', 'center', 'right', 'justify'],
+        defaultAlignment: 'left',
       }),
       Link.configure({
         openOnClick: false,
