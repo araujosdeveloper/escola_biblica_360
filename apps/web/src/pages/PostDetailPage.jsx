@@ -162,6 +162,9 @@ export default function PostDetailPage() {
   const categoryName = categoryRecord?.name || 'Artigo';
   const categorySlug = categoryRecord?.slug || '';
   const imageUrl = post?.featured_image ? pb.files.getUrl(post, post.featured_image) : null;
+  const heroImageUrl = post?.hero_image
+    ? pb.files.getUrl(post, post.hero_image)
+    : imageUrl;
   const pdfUrl = post?.pdf_file ? pb.files.getUrl(post, post.pdf_file) : null;
   const slidesUrl = post?.slides_file ? pb.files.getUrl(post, post.slides_file) : null;
   const authorName = post ? getAuthorName(post) : 'Equipe Escola Bíblica 360';
@@ -229,7 +232,7 @@ export default function PostDetailPage() {
       <SEO
         title={`${post.seo_title || post.title} - Escola Bíblica 360`}
         description={post.seo_description || post.excerpt}
-        image={imageUrl}
+        image={imageUrl || heroImageUrl}
         type="article"
         publishedDate={post.published_at || post.created}
         modifiedDate={post.updated}
@@ -245,27 +248,29 @@ export default function PostDetailPage() {
 
       <section className="relative overflow-hidden bg-[#050b12] text-white">
         <div className="absolute inset-0">
-          {imageUrl && (
+          {heroImageUrl && (
             <img
-              src={imageUrl}
-              alt={post.title}
-              className="h-full w-full object-cover opacity-24"
+              src={heroImageUrl}
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover opacity-45"
             />
           )}
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050b12] via-[#07131f]/96 to-[#12324a]/88" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.22),transparent_32%)]" />
-          <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#02070d] via-[#07131f]/92 to-[#07131f]/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050b12] via-[#050b12]/35 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(212,175,55,0.20),transparent_32%)]" />
+          <div className="absolute inset-0 opacity-[0.055] bg-[linear-gradient(rgba(255,255,255,0.85)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.85)_1px,transparent_1px)] bg-[size:76px_76px]" />
         </div>
 
         <div className="container relative z-10 py-16 md:py-24">
-          <div className="mx-auto max-w-5xl">
-            <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/74">
+          <div className="max-w-5xl">
+            <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/82">
               <Link to="/" className="transition-colors hover:text-[#f6d66b]">
                 Home
               </Link>
 
-              <ChevronRight className="h-4 w-4 text-white/35" />
+              <ChevronRight className="h-4 w-4 text-white/45" />
 
               {categorySlug ? (
                 <Link
@@ -278,7 +283,7 @@ export default function PostDetailPage() {
                 <span>{categoryName}</span>
               )}
 
-              <ChevronRight className="h-4 w-4 text-white/35" />
+              <ChevronRight className="h-4 w-4 text-white/45" />
 
               <span className="max-w-[240px] truncate font-bold text-white sm:max-w-md">
                 {post.title}
@@ -289,36 +294,36 @@ export default function PostDetailPage() {
               {categoryName}
             </Badge>
 
-            <h1 className="mb-6 max-w-4xl font-['Poppins'] text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 max-w-4xl font-['Poppins'] text-4xl font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.65)] md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
 
             {post.excerpt && (
-              <p className="mb-8 max-w-3xl text-lg font-medium leading-8 text-white/92 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-xl">
+              <p className="mb-8 max-w-3xl text-lg font-medium leading-8 text-white/95 drop-shadow-[0_3px_14px_rgba(0,0,0,0.7)] md:text-xl">
                 {post.excerpt}
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-white/86">
-              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-white/92">
+              <div className="flex items-center gap-2 rounded-full border border-white/18 bg-black/25 px-4 py-2 backdrop-blur-md">
                 <User className="h-4 w-4 text-[#f6d66b]" />
                 <span>{authorName}</span>
               </div>
 
-              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+              <div className="flex items-center gap-2 rounded-full border border-white/18 bg-black/25 px-4 py-2 backdrop-blur-md">
                 <Calendar className="h-4 w-4 text-[#f6d66b]" />
                 <time dateTime={post.published_at || post.created}>{formattedDate}</time>
               </div>
 
               {post.reading_time && (
-                <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <div className="flex items-center gap-2 rounded-full border border-white/18 bg-black/25 px-4 py-2 backdrop-blur-md">
                   <Clock className="h-4 w-4 text-[#f6d66b]" />
                   <span>{post.reading_time} min de leitura</span>
                 </div>
               )}
 
               {typeof post.views === 'number' && (
-                <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <div className="flex items-center gap-2 rounded-full border border-white/18 bg-black/25 px-4 py-2 backdrop-blur-md">
                   <Eye className="h-4 w-4 text-[#f6d66b]" />
                   <span>{post.views} visualizações</span>
                 </div>

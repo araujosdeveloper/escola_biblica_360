@@ -28,6 +28,7 @@ import {
   Download,
   Presentation,
   Info,
+  PanelTop,
 } from 'lucide-react';
 
 import { toast } from 'sonner';
@@ -66,6 +67,9 @@ export default function AdminPostForm({ mode = 'create' }) {
 
   const [featuredImage, setFeaturedImage] = useState(null);
   const [currentImage, setCurrentImage] = useState('');
+
+  const [heroImage, setHeroImage] = useState(null);
+  const [currentHeroImage, setCurrentHeroImage] = useState('');
 
   const [pdfFile, setPdfFile] = useState(null);
   const [currentPdf, setCurrentPdf] = useState('');
@@ -134,6 +138,10 @@ export default function AdminPostForm({ mode = 'create' }) {
 
           if (post.featured_image) {
             setCurrentImage(pb.files.getUrl(post, post.featured_image));
+          }
+
+          if (post.hero_image) {
+            setCurrentHeroImage(pb.files.getUrl(post, post.hero_image));
           }
 
           if (post.pdf_file) {
@@ -238,6 +246,10 @@ export default function AdminPostForm({ mode = 'create' }) {
 
       if (featuredImage) {
         data.append('featured_image', featuredImage);
+      }
+
+      if (heroImage) {
+        data.append('hero_image', heroImage);
       }
 
       if (pdfFile) {
@@ -459,8 +471,7 @@ export default function AdminPostForm({ mode = 'create' }) {
                 />
 
                 <p className="text-xs leading-5 text-gray-500">
-                  O conteúdo será exibido justificado no site para melhorar a leitura.
-                  Para adicionar botões de alinhamento dentro do editor, vamos ajustar o componente RichTextEditor.
+                  Use os botões do editor para formatar o conteúdo, alinhar textos e justificar parágrafos.
                 </p>
               </div>
             </div>
@@ -627,7 +638,7 @@ export default function AdminPostForm({ mode = 'create' }) {
                 </h3>
 
                 <p className="text-sm text-gray-500">
-                  Upload da capa do artigo.
+                  Imagem ilustrativa do post, cards e conteúdo interno.
                 </p>
               </div>
             </div>
@@ -636,6 +647,30 @@ export default function AdminPostForm({ mode = 'create' }) {
               onFileSelect={setFeaturedImage}
               accept="image/*"
               currentFileUrl={currentImage}
+            />
+          </div>
+
+          <div className="rounded-2xl border border-admin-border bg-white p-6 shadow-sm">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-admin-gold/10 text-admin-gold">
+                <PanelTop className="h-5 w-5" />
+              </div>
+
+              <div>
+                <h3 className="font-['Poppins'] text-lg font-bold text-admin-dark">
+                  Imagem do Topo
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  Imagem usada somente como fundo do cabeçalho do artigo.
+                </p>
+              </div>
+            </div>
+
+            <FileUpload
+              onFileSelect={setHeroImage}
+              accept="image/*"
+              currentFileUrl={currentHeroImage}
             />
           </div>
 
